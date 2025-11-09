@@ -1,0 +1,1950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaNexus - The Market</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            zoom: 0.75;
+            -moz-transform: scale(0.75);
+            -moz-transform-origin: 0 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: rotate(10deg) scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .nav-links a.active {
+            color: #00ff88;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.5rem;
+            padding-top: 6rem;
+            position: relative;
+        }
+
+        /* Background Effects */
+        .container::before {
+            content: '';
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+            top: 10%;
+            right: -200px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .container::after {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1), transparent);
+            bottom: 10%;
+            left: -150px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite 2s;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
+            animation: fadeInScale 0.8s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: #00ffaa;
+            margin-bottom: 0.5rem;
+            letter-spacing: -3px;
+            line-height: 1;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: #94a3b8;
+            margin: 0;
+            font-weight: 400;
+        }
+
+        /* Section Styles */
+        .market-section {
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            letter-spacing: -1px;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        /* Compact Grid Layout */
+        .compact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        .market-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            object-fit: contain;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.2);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-box {
+            background: rgba(0, 212, 255, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00d4ff;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 0.3rem;
+        }
+
+        /* Trend Pills */
+        .trend-pills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+            margin: 1rem 0;
+        }
+
+        .trend-pill {
+            background: rgba(0, 255, 136, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #00ff88;
+            border: 1px solid rgba(0, 255, 136, 0.3);
+        }
+
+        /* Customer Cards */
+        .customer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .customer-card {
+            background: rgba(26, 35, 50, 0.4);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+        }
+
+        .customer-card h4 {
+            color: #00d4ff;
+            font-size: 1.1rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .customer-card .detail {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .customer-card .detail strong {
+            color: #00ff88;
+        }
+
+        /* Research Stats */
+        .research-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .research-stat {
+            text-align: center;
+            padding: 1.25rem;
+            background: rgba(0, 212, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            min-height: 350px;
+        }
+
+        .research-stat .percentage {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #00d4ff;
+        }
+
+        .research-stat .label {
+            font-size: 1rem;
+            color: #94a3b8;
+            margin-top: 0.75rem;
+            line-height: 1.5;
+        }
+
+        /* Competitor Table */
+        .competitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+
+        .competitor-table th,
+        .competitor-table td {
+            padding: 0.9rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .competitor-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .competitor-table td {
+            color: #94a3b8;
+        }
+
+        .competitor-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .competitor-name {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        .advantage {
+            color: #00ff88;
+            font-weight: 500;
+        }
+
+        /* Advantage List */
+        .advantage-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .advantage-item {
+            display: flex;
+            align-items: start;
+            gap: 0.8rem;
+            padding: 0.9rem;
+            background: rgba(0, 255, 136, 0.05);
+            border-radius: 10px;
+            border-left: 3px solid #00ff88;
+        }
+
+        .advantage-item .icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .advantage-item .text {
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        .advantage-item .text strong {
+            color: #00ff88;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        /* Strategy Grid */
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr 80px 1fr;
+            gap: 0.5rem;
+            align-items: stretch;
+        }
+
+        .strategy-card {
+            background: rgba(26, 35, 50, 0.4);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .strategy-card h4 {
+            color: #00d4ff;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .strategy-card ul {
+            list-style: none;
+            padding: 0;
+            flex: 1;
+            padding-left: 0;
+        }
+
+        .strategy-card li {
+            padding: 0.4rem 0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .strategy-card li::before {
+            content: '●';
+            position: absolute;
+            left: 0;
+            color: #10b981;
+            font-size: 1.2rem;
+            line-height: 1.5;
+        }
+
+        .arrow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+        }
+
+        .flow-arrow {
+            width: 80px;
+            height: 80px;
+            filter: drop-shadow(0 0 10px rgba(139, 92, 246, 0.4));
+        }
+
+        /* Highlight Box - Updated */
+        .highlight-box {
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 1rem;
+            background: rgba(0, 212, 255, 0.05);
+            font-size: 0.95rem;
+            color: #94a3b8;
+            line-height: 1.7;
+        }
+
+        .highlight-box strong {
+            color: #00d4ff;
+        }
+
+        /* Text Content Styles */
+        .text-content {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .text-content h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+
+        .text-content h4 {
+            color: #8b5cf6;
+            font-size: 1.2rem;
+            margin: 1.2rem 0 0.6rem 0;
+            font-weight: 600;
+        }
+
+        .text-content p {
+            margin-bottom: 0.8rem;
+        }
+
+        .text-content strong {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* Animated Chart Styles */
+        .chart-container {
+            perspective: 1000px;
+        }
+
+        /* Animate the line drawing in */
+        .research-stat.in-view .progress-line {
+            animation: drawLine 2.5s ease-out forwards;
+        }
+
+        /* Fade in the area under curve */
+        .research-stat.in-view .progress-area {
+            animation: fadeInArea 1s ease-out 1s forwards;
+        }
+
+        /* Animate data points appearing */
+        .research-stat.in-view .data-point:nth-child(6) {
+            animation: popIn 0.4s ease-out 0.5s forwards;
+        }
+
+        .research-stat.in-view .data-point:nth-child(7) {
+            animation: popIn 0.4s ease-out 0.9s forwards;
+        }
+
+        .research-stat.in-view .data-point:nth-child(8) {
+            animation: popIn 0.4s ease-out 1.3s forwards;
+        }
+
+        .research-stat.in-view .data-point:nth-child(9) {
+            animation: popIn 0.4s ease-out 1.7s forwards, shake 0.5s ease-out 1.9s;
+        }
+
+        .research-stat.in-view .data-point:nth-child(10) {
+            animation: popIn 0.4s ease-out 2.1s forwards, shake 0.5s ease-out 2.3s;
+        }
+
+        /* Show drop-off arrow */
+        .research-stat.in-view .dropoff-arrow {
+            animation: fadeInArrow 0.6s ease-out 2.2s forwards;
+        }
+
+        @keyframes drawLine {
+            0% {
+                stroke-dashoffset: 400;
+            }
+            100% {
+                stroke-dashoffset: 0;
+            }
+        }
+
+        @keyframes fadeInArea {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.3);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateY(0); }
+            25% { transform: translateY(-3px); }
+            75% { transform: translateY(3px); }
+        }
+
+        @keyframes fadeInArrow {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Hover effect on chart */
+        .chart-container:hover .progress-line {
+            filter: drop-shadow(0 0 8px rgba(0, 255, 136, 0.6));
+        }
+
+        /* Stat boxes hover effects */
+        .stat-box-green:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.4);
+            border-color: rgba(0, 255, 136, 0.6) !important;
+        }
+
+        .stat-box-blue:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 191, 255, 0.4);
+            border-color: rgba(0, 191, 255, 0.6) !important;
+        }
+
+        /* Insight boxes hover effects */
+        .insight-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(138, 43, 226, 0.3);
+            background: rgba(15, 23, 42, 0.6) !important;
+        }
+
+        /* Solution box hover effect */
+        .solution-box:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.4);
+            border-color: rgba(0, 255, 136, 0.7) !important;
+        }
+
+        /* Hover effects for demographic and psychographic boxes */
+        .animate-on-scroll > div[style*="rgba(0, 212, 255"]:hover,
+        .animate-on-scroll > div[style*="rgba(0, 255, 136"]:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 24px rgba(92, 225, 230, 0.3);
+        }
+
+        /* Flip Cards */
+        .flip-cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 1.5rem 0;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .flip-card {
+            perspective: 1000px;
+            height: 360px;
+            cursor: pointer;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.flipped .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .flip-card:hover .flip-card-front,
+        .flip-card:hover .flip-card-back {
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.25);
+        }
+
+        /* Front Side Styling */
+        .flip-card-front {
+            background: linear-gradient(135deg, #00d4ff 0%, #1d587f 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .flip-card[data-color="green"] .flip-card-front {
+            background: linear-gradient(135deg, #10b981 0%, #073f2d 100%);
+        }
+
+        .flip-card[data-color="purple"] .flip-card-front {
+            background: linear-gradient(135deg, #8b5cf6 0%, #2f1361 100%);
+        }
+
+        .card-icon {
+            font-size: 4.5rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .flip-card-front h3 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 0.8rem 0 0.4rem 0;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .flip-hint {
+            position: absolute;
+            bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.8;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* Back Side Styling */
+        .flip-card-back {
+            background: rgb(255, 255, 255);
+            color: #1e293b;
+            transform: rotateY(180deg);
+            justify-content: flex-start;
+            padding: 1.75rem;
+        }
+
+        .back-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 3px solid #00d4ff;
+            width: 100%;
+        }
+
+        .flip-card[data-color="green"] .back-header {
+            border-bottom-color: #10b981;
+        }
+
+        .flip-card[data-color="purple"] .back-header {
+            border-bottom-color: #8b5cf6;
+        }
+
+        .back-icon {
+            font-size: 2.2rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+
+        .back-header h4 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin: 0;
+            color: #1e293b;
+        }
+
+        .strategy-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .strategy-list li {
+            padding: 0.6rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            line-height: 1.5;
+            color: #475569;
+            font-size: 0.92rem;
+            transition: all 0.3s ease;
+        }
+
+        .strategy-list li:hover {
+            color: #1e293b;
+            padding-left: 2rem;
+        }
+
+        .strategy-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #00d4ff;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .flip-card[data-color="green"] .strategy-list li::before {
+            color: #10b981;
+        }
+
+        .flip-card[data-color="purple"] .strategy-list li::before {
+            color: #8b5cf6;
+        }
+
+        .strategy-list li:hover::before {
+            transform: scale(1.2);
+        }
+
+        /* Staggered animation for cards */
+        .flip-card {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideUp 0.6s ease forwards;
+        }
+
+        .flip-card:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .flip-card:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .flip-card:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 1.5rem 5%;
+            text-align: center;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-content p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .footer-meta {
+            display: flex;
+            gap: 2rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-meta strong {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .strategy-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .arrow-container {
+                transform: rotate(90deg);
+                padding: 0.5rem 0;
+            }
+
+            .strategy-card {
+                min-height: auto;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            html {
+                zoom: 0.6;
+            }
+
+            .compact-grid,
+            .customer-grid,
+            .advantage-list {
+                grid-template-columns: 1fr;
+            }
+
+            .strategy-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .research-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                zoom: 0.55;
+            }
+
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .page-header p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .stats-grid,
+            .research-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .logo img {
+                height: 28px;
+                width: 28px;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+                padding-top: 5rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .competitor-table {
+                font-size: 0.8rem;
+            }
+
+            .competitor-table th,
+            .competitor-table td {
+                padding: 0.7rem;
+            }
+
+            .customer-card > div[style*="display: flex"] {
+                flex-direction: column !important;
+            }
+            
+            .customer-card img {
+                width: 100% !important;
+                max-width: 200px !important;
+                margin: 0 auto;
+            }
+            
+            .research-stats {
+                flex-direction: column !important;
+            }
+
+            .flip-cards-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .flip-card {
+                height: 340px;
+            }
+
+            .flip-card-front,
+            .flip-card-back {
+                padding: 1.75rem 1.5rem;
+            }
+
+            .card-icon {
+                font-size: 3.8rem;
+            }
+
+            .flip-card-front h3 {
+                font-size: 2.4rem;
+            }
+
+            .card-subtitle {
+                font-size: 1rem;
+            }
+
+            .back-header h4 {
+                font-size: 1.1rem;
+            }
+
+            .strategy-list li {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                zoom: 0.5;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+                letter-spacing: -1px;
+            }
+
+            .page-header p {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .content-card {
+                padding: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="vitanexus-logo.png" alt="VitaNexus Logo">
+                <span class="logo-text">VitaNexus</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">The Pitch</a></li>
+                <li><a href="business.html">The Business</a></li>
+                <li><a href="market.html" class="active">The Market</a></li>
+                <li><a href="strategy.html">The Strategy</a></li>
+                <li><a href="finance.html">The Finance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>The Market</h1>
+        </div>
+
+<!-- a. Industry Analysis -->
+<section class="market-section">
+    <div class="section-header">
+        <h2 class="section-title">Industry Analysis</h2>
+    </div>
+    
+    <div class="content-card">
+        <div class="compact-grid" style="grid-template-columns: 1fr 2.5fr; align-items: stretch;">
+            <div style="display: flex; flex-direction: column; height: 100%;">
+                <div style="padding: 1rem; border-radius: 10px; margin-bottom: 1rem; background: rgba(0, 255, 136, 0.05); border: 1px solid rgba(0, 255, 136, 0.2); flex: 1; display: flex; align-items: center;">
+                    <p style="color: #94a3b8; line-height: 1.7; margin: 0; font-size: 0.95rem;">
+                        The fitness app market has experienced exponential growth due to rising awareness of holistic wellness, rapid advances in AI, and activity tracking. Projected to reach a revenue of <strong style="color: #00ff88;">USD$ 626.6 million</strong> by 2033 in Australia, significantly increasing from the previously generated revenue of <strong style="color: #00ff88;">USD 195.8 million</strong> in 2024, as seen in the graph beside (Grand View Research, 2025).
+                    </p>
+                </div>
+
+                <div class="highlight-box" style="flex: 1; display: flex; align-items: center; margin-top: 0;">
+                    <p style="margin: 0; font-size: 0.93rem;">
+                        <strong>Market Opportunity:</strong> A compound annual growth rate of 13.7% is expected between 2025 and 2033, demonstrating the ongoing demand and strong desirability for innovative fitness services such as VitaNexus (Grand View Research, 2025).
+                    </p>
+                </div>
+            </div>
+<img src="market-growth-chart.png" alt="Australia Fitness App Market Growth 2018-2030" class="market-image">
+        </div>
+    </div>
+</section>
+
+<!-- b. Market Research -->
+<section class="market-section">
+    <div class="section-header">
+        <h2 class="section-title">Market Research</h2>
+    </div>
+
+    <div class="content-card">
+        <div style="padding: 2rem; background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(138, 43, 226, 0.05) 100%); border-radius: 15px; border: 1px solid rgba(0, 255, 136, 0.2);">
+            
+            <!-- Main Statistics Row -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 2rem;">
+                <!-- Stat 1 -->
+                <div class="stat-box stat-box-green" style="text-align: center; padding: 1.5rem; background: rgba(15, 23, 42, 0.6); border-radius: 12px; border: 2px solid rgba(0, 255, 136, 0.3); transition: all 0.3s ease; cursor: pointer;">
+                    <div style="font-size: 3rem; margin-bottom: 0.75rem;">📱</div>
+                    <div style="font-size: 3rem; font-weight: bold; color: #00ff88; margin-bottom: 0.4rem; line-height: 1;">43%</div>
+                    <div style="color: #94a3b8; font-size: 0.92rem; line-height: 1.4;">
+                        Of adults use technology to track fitness & health
+                    </div>
+                </div>
+
+                <!-- Stat 2 -->
+                <div class="stat-box stat-box-green" style="text-align: center; padding: 1.5rem; background: rgba(15, 23, 42, 0.6); border-radius: 12px; border: 2px solid rgba(0, 255, 136, 0.3); transition: all 0.3s ease; cursor: pointer;">
+                    <div style="font-size: 3rem; margin-bottom: 0.75rem;">💪</div>
+                    <div style="font-size: 3rem; font-weight: bold; color: #00ff88; margin-bottom: 0.4rem; line-height: 1;">67%</div>
+                    <div style="color: #94a3b8; font-size: 0.92rem; line-height: 1.4;">
+                        Of these users rely on health & fitness apps
+                    </div>
+                </div>
+
+                <!-- Stat 3 -->
+                <div class="stat-box stat-box-blue" style="text-align: center; padding: 1.5rem; background: rgba(15, 23, 42, 0.6); border-radius: 12px; border: 2px solid rgba(0, 191, 255, 0.3); transition: all 0.3s ease; cursor: pointer;">
+                    <div style="font-size: 3rem; margin-bottom: 0.75rem;">📉</div>
+                    <div style="font-size: 3rem; font-weight: bold; color: #00d4ff; margin-bottom: 0.4rem; line-height: 1;">71%</div>
+                    <div style="color: #00d4ff; font-size: 0.92rem; line-height: 1.4;">
+                        Of fitness app users quit fitness apps by month 3
+                    </div>
+                </div>
+            </div>
+
+            <!-- Insights Text -->
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;">
+                <div class="insight-box" style="padding: 1.25rem; background: rgba(15, 23, 42, 0.4); border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
+                    <p style="color: #cbd5e1; line-height: 1.7; margin: 0; font-size: 0.95rem;">
+                        Recent shifts in consumer behaviour reveal a growing demand for personalised, data-driven fitness solutions that adapt to individual goals and lifestyles. In Australia, <strong style="color: #00ff88;">43% of adults use some sort of technology to track their fitness and health</strong>, with <strong style="color: #00ff88;">67% of these users relying on health and fitness apps</strong>, underscoring the nation's increasing embrace of digital wellness and self-managed health improvement <em style="color: #94a3b8;">(Serra, 2024)</em>.
+                    </p>
+                </div>
+
+                <div class="insight-box" style="padding: 1.25rem; background: rgba(15, 23, 42, 0.4); border-radius: 10px; transition: all 0.3s ease; cursor: pointer;">
+                    <p style="color: #cbd5e1; line-height: 1.7; margin: 0; font-size: 0.95rem;">
+                        <strong style="color: #00dfff;">71% of fitness-app users quit by the third month</strong>, frequently because the apps offered generic programs without continuous adaptation or meaningful feedback <em style="color: #94a3b8;">(Solsten, 2025)</em>. Many fitness apps lack personalised guidance and holistic tracking (training + nutrition + recovery), which significantly contributes to elevated user-churn rates <em style="color: #94a3b8;">(Consagous Technologies, 2021)</em>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Solution Statement -->
+            <div class="solution-box" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(0, 255, 136, 0.1) 0%, rgba(138, 43, 226, 0.1) 100%); border-radius: 12px; border: 2px solid rgba(0, 255, 136, 0.4); text-align: center; transition: all 0.3s ease; cursor: pointer;">
+                <p style="color: #e2e8f0; line-height: 1.8; margin: 0; font-size: 1.05rem; font-weight: 500;">
+                    <strong style="color: #00ff88;">VitaNexus</strong> eliminates these limitations by offering a fully integrated, AI-driven platform that personalises training, nutrition, and recovery to sustain engagement and reduce user dropout.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- b. Customers -->
+<section class="market-section">
+    <div class="section-header">
+        <h2 class="section-title">Target Customers</h2>
+    </div>
+    
+    <!-- Customer Profiles Section -->
+    <div class="content-card animate-on-scroll">
+        <h3 style="color: #00d4ff; margin: 0 0 1.2rem 0; font-size: 1.7rem; font-weight: 700;">Customer Profiles</h3>
+
+        <div class="customer-grid">
+            <!-- Ethan Profile -->
+            <div class="customer-card animate-on-scroll" style="display: flex; gap: 1.25rem; align-items: flex-start;">
+<img src="ethan-photo.png"
+                     alt="Ethan - Young Athlete" 
+                     style="width: 160px; height: 160px; border-radius: 12px; object-fit: cover; border: 2px solid rgba(0, 212, 255, 0.3); flex-shrink: 0;">
+                <div style="flex: 1;">
+                    <h4>Ethan, 19</h4>
+                    <div class="detail"><strong>Profile:</strong> University student athlete seeking ways to track fitness and improve performance.</div>
+                    <div class="detail"><strong>Goals:</strong> Improve fitness, track progress, and stay consistent in training.</div>
+                    <div class="detail"><strong>Pains:</strong> Staying consistent, filtering reliable fitness information, and limited time.</div>
+                    <div class="detail"><strong>Desires:</strong> Simple tracking, clear progress, and personalised motivational guidance.</div>
+                </div>
+            </div>
+
+            <!-- Maya Profile -->
+            <div class="customer-card animate-on-scroll" style="display: flex; gap: 1.25rem; align-items: flex-start;">
+<img src="team-member-photo.png"
+                     alt="Maya - Professional Woman" 
+                     style="width: 160px; height: 160px; border-radius: 12px; object-fit: cover; border: 2px solid rgba(0, 255, 136, 0.3); flex-shrink: 0;">
+                <div style="flex: 1;">
+                    <h4>Maya, 33</h4>
+                    <div class="detail"><strong>Profile:</strong> Busy office professional who values fitness but struggles to find time for consistent routines and guidance.</div>
+                    <div class="detail"><strong>Goals:</strong> Stay healthy, maintain energy, and manage stress associated with work via fitness.</div>
+                    <div class="detail"><strong>Pains:</strong> Limited time, fatigue from long work hours, difficulty sticking to a routine, and knowledge.</div>
+                    <div class="detail"><strong>Desires:</strong> Quick optimal workouts and an easy way to balance fitness with a busy lifestyle.</div>
+                </div>
+            </div>
+        </div>
+
+        <h3 style="color: #00d4ff; margin: 1.5rem 0 1.2rem; font-size: 1.7rem; font-weight: 700; text-align: center;">(236 Australian Target Customer Respondents — Survey Findings)</h3>
+        
+        <div class="research-stats">
+            
+            <!-- STAT 1: ANIMATED CHART -->
+            <div class="research-stat animate-on-scroll">
+                <div>
+                    <div class="percentage">82%</div>
+                    <div class="label" style="margin-top: 0.5rem;">Struggle to stay consistent with fitness apps.</div>
+                </div>
+                
+                <!-- Fitness Progress Chart -->
+                <div class="chart-container" style="display: flex; justify-content: center; align-items: center; margin: 0.75rem 0; width: 100%;">
+                    <svg width="100%" height="130" viewBox="0 0 400 130" style="overflow: visible; max-width: 400px;">
+                        <!-- Grid Lines (Background) -->
+                        <g class="grid-lines" opacity="0.2">
+                            <line x1="50" y1="25" x2="350" y2="25" stroke="#00ff88" stroke-width="1" stroke-dasharray="5,5"/>
+                            <line x1="50" y1="50" x2="350" y2="50" stroke="#00ff88" stroke-width="1" stroke-dasharray="5,5"/>
+                            <line x1="50" y1="75" x2="350" y2="75" stroke="#00ff88" stroke-width="1" stroke-dasharray="5,5"/>
+                            <line x1="50" y1="100" x2="350" y2="100" stroke="#00ff88" stroke-width="1" stroke-dasharray="5,5"/>
+                        </g>
+                        
+                        <!-- Axis -->
+                        <line x1="50" y1="100" x2="350" y2="100" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+                        <line x1="50" y1="25" x2="50" y2="100" stroke="#ffffff" stroke-width="2" opacity="0.5"/>
+                        
+                        <!-- Week Labels -->
+                        <text x="80" y="118" text-anchor="middle" fill="#888" font-size="10">Week 1</text>
+                        <text x="140" y="118" text-anchor="middle" fill="#888" font-size="10">Week 2</text>
+                        <text x="200" y="118" text-anchor="middle" fill="#888" font-size="10">Week 3</text>
+                        <text x="260" y="118" text-anchor="middle" fill="#888" font-size="10">Week 4</text>
+                        <text x="320" y="118" text-anchor="middle" fill="#888" font-size="10">Week 5</text>
+                        
+                        <!-- Progress Line Path (will be animated) -->
+                        <path class="progress-line" 
+                              d="M 50,100 L 80,40 L 140,35 L 200,45 L 260,70 L 320,100" 
+                              fill="none" 
+                              stroke="url(#lineGradient)" 
+                              stroke-width="4" 
+                              stroke-linecap="round"
+                              stroke-dasharray="400"
+                              stroke-dashoffset="400"/>
+                        
+                        <!-- Gradient Definition -->
+                        <defs>
+                            <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#00ff88;stop-opacity:1" />
+                                <stop offset="60%" style="stop-color:#00d4ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff6b6b;stop-opacity:1" />
+                            </linearGradient>
+                            
+                            <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00ff88;stop-opacity:0.3" />
+                                <stop offset="100%" style="stop-color:#00ff88;stop-opacity:0" />
+                            </linearGradient>
+                        </defs>
+                        
+                        <!-- Area under curve (optional) -->
+                        <path class="progress-area" 
+                              d="M 50,100 L 80,40 L 140,35 L 200,45 L 260,70 L 320,100 Z" 
+                              fill="url(#areaGradient)" 
+                              opacity="0"/>
+                        
+                        <!-- Data Points -->
+                        <circle class="data-point" cx="80" cy="40" r="5" fill="#00ff88" opacity="0">
+                            <animate class="point-pulse" attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite" begin="indefinite"/>
+                        </circle>
+                        <circle class="data-point" cx="140" cy="35" r="5" fill="#00ff88" opacity="0">
+                            <animate class="point-pulse" attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite" begin="indefinite"/>
+                        </circle>
+                        <circle class="data-point" cx="200" cy="45" r="5" fill="#00d4ff" opacity="0">
+                            <animate class="point-pulse" attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite" begin="indefinite"/>
+                        </circle>
+                        <circle class="data-point" cx="260" cy="70" r="5" fill="#ff9f40" opacity="0">
+                            <animate class="point-pulse" attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite" begin="indefinite"/>
+                        </circle>
+                        <circle class="data-point" cx="320" cy="100" r="5" fill="#ff6b6b" opacity="0">
+                            <animate class="point-pulse" attributeName="r" values="5;7;5" dur="1s" repeatCount="indefinite" begin="indefinite"/>
+                        </circle>
+                        
+                        <!-- Drop-off Arrow (NO TEXT) -->
+                        <g class="dropoff-arrow" opacity="0">
+                            <line x1="260" y1="70" x2="320" y2="100" stroke="#ff6b6b" stroke-width="3" marker-end="url(#arrowhead)"/>
+                        </g>
+                        
+                        <!-- Arrow marker -->
+                        <defs>
+                            <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                <polygon points="0 0, 10 3, 0 6" fill="#ff6b6b" />
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </div>
+
+            <!-- STAT 2: VENN DIAGRAM -->
+            <div class="research-stat animate-on-scroll">
+                <div style="display: flex; justify-content: center; margin: 0.75rem 0; flex: 1;">
+                    <svg width="260" height="220" viewBox="0 0 260 220">
+                        <!-- Training Circle (Top) - NEON GREEN -->
+                        <circle cx="130" cy="70" r="55" fill="rgba(0, 255, 136, 0.25)" stroke="#00ff88" stroke-width="2.5"/>
+                        <text x="130" y="38" text-anchor="middle" fill="#00ff88" font-size="14" font-weight="bold">Training</text>
+                        
+                        <!-- Nutrition Circle (Bottom Left) -->
+                        <circle cx="95" cy="135" r="55" fill="rgba(255, 107, 107, 0.25)" stroke="#ff6b6b" stroke-width="2.5"/>
+                        <text x="52" y="180" text-anchor="middle" fill="#ff6b6b" font-size="14" font-weight="bold">Nutrition</text>
+                        
+                        <!-- Mental Health Circle (Bottom Right) -->
+                        <circle cx="165" cy="135" r="55" fill="rgba(147, 51, 234, 0.25)" stroke="#9333ea" stroke-width="2.5"/>
+                        <text x="193" y="172" text-anchor="middle" fill="#9333ea" font-size="13" font-weight="bold">Mental</text>
+                        <text x="193" y="188" text-anchor="middle" fill="#9333ea" font-size="13" font-weight="bold">Wellness</text>
+                        
+                        <!-- Center 74% - NEON BLUE (NO GLOW) -->
+                        <text x="130" y="120" text-anchor="middle" fill="#00d4ff" font-size="44" font-weight="bold">74%</text>
+                    </svg>
+                </div>
+                <div class="label">Would be more likely to use an app that combines training, nutrition, and mental health in one.</div>
+            </div>
+
+            <!-- STAT 3: STICK FIGURES -->
+            <div class="research-stat animate-on-scroll">
+                <div class="percentage">68%</div>
+                <!-- Stick Figures Visualization -->
+                <div style="display: flex; justify-content: center; gap: 7px; margin: 1.2rem 0; flex: 1; align-items: center;">
+                    <!-- Figure 1 - Filled -->
+                    <svg width="36" height="55" viewBox="0 0 40 60" style="filter: drop-shadow(0 2px 4px rgba(0, 255, 136, 0.3));">
+                        <circle cx="20" cy="10" r="6" fill="#00ff88"/>
+                        <line x1="20" y1="16" x2="20" y2="35" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="10" y2="32" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="30" y2="32" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="12" y2="55" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="28" y2="55" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <!-- Figure 2 - Filled -->
+                    <svg width="36" height="55" viewBox="0 0 40 60" style="filter: drop-shadow(0 2px 4px rgba(0, 255, 136, 0.3));">
+                        <circle cx="20" cy="10" r="6" fill="#00ff88"/>
+                        <line x1="20" y1="16" x2="20" y2="35" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="10" y2="32" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="30" y2="32" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="12" y2="55" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="28" y2="55" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <!-- Figure 3 - Filled -->
+                    <svg width="36" height="55" viewBox="0 0 40 60" style="filter: drop-shadow(0 2px 4px rgba(0, 255, 136, 0.3));">
+                        <circle cx="20" cy="10" r="6" fill="#00ff88"/>
+                        <line x1="20" y1="16" x2="20" y2="35" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="10" y2="32" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="30" y2="32" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="12" y2="55" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="28" y2="55" stroke="#00ff88" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <!-- Figure 4 - Partially Filled (40% - representing the 0.4 of 68%) -->
+                    <svg width="36" height="55" viewBox="0 0 40 60" style="filter: drop-shadow(0 2px 4px rgba(0, 255, 136, 0.2));">
+                        <defs>
+                            <linearGradient id="partialFill" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="40%" style="stop-color:#00ff88;stop-opacity:1" />
+                                <stop offset="40%" style="stop-color:rgba(92, 225, 230, 0.3);stop-opacity:1" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="20" cy="10" r="6" fill="url(#partialFill)"/>
+                        <line x1="20" y1="16" x2="20" y2="35" stroke="url(#partialFill)" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="10" y2="32" stroke="url(#partialFill)" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="30" y2="32" stroke="url(#partialFill)" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="12" y2="55" stroke="url(#partialFill)" stroke-width="3" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="28" y2="55" stroke="url(#partialFill)" stroke-width="3" stroke-linecap="round"/>
+                    </svg>
+                    <!-- Figure 5 - Empty -->
+                    <svg width="36" height="55" viewBox="0 0 40 60" style="opacity: 0.3;">
+                        <circle cx="20" cy="10" r="6" fill="none" stroke="rgba(92, 225, 230, 0.5)" stroke-width="2"/>
+                        <line x1="20" y1="16" x2="20" y2="35" stroke="rgba(92, 225, 230, 0.5)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="10" y2="32" stroke="rgba(92, 225, 230, 0.5)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="22" x2="30" y2="32" stroke="rgba(92, 225, 230, 0.5)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="12" y2="55" stroke="rgba(92, 225, 230, 0.5)" stroke-width="2" stroke-linecap="round"/>
+                        <line x1="20" y1="35" x2="28" y2="55" stroke="rgba(92, 225, 230, 0.5)" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <div class="label">Struggle to stay motivated without feedback or visible results.</div>
+            </div>
+        </div>
+
+        <!-- COMBINED QUOTES BOX -->
+        <div class="highlight-box animate-on-scroll" style="text-align: center; font-style: italic; margin-top: 1.5rem;">
+            <p style="margin-bottom: 0.8rem;">
+                "Most apps feel generic; I want one that adjusts to my routine and gives feedback that keeps me going." <span style="color: #00ff88; font-weight: 600;">— Jayden</span>
+            </p>
+            <p style="margin: 0;">
+                "I lose motivation when I can't see how much I've improved. I need something that actually tracks my progress." <span style="color: #00ff88; font-weight: 600;">— Karin</span>
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- c. Competitor Analysis -->
+<section class="market-section">
+    <div class="section-header">
+        <h2 class="section-title">Competitor Analysis</h2>
+    </div>
+    
+    <div class="content-card">
+        <p style="color: #94a3b8; line-height: 1.7; margin-bottom: 1.5rem; text-align: center; font-size: 1.05rem;">
+            A comprehensive comparison of VitaNexus against key competitors in the fitness app market
+        </p>
+
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: separate; border-spacing: 0;">
+                <thead>
+                    <tr style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.15) 0%, rgba(0, 255, 136, 0.15) 100%);">
+                        <th style="padding: 1.2rem 0.9rem; text-align: left; color: #00d4ff; font-weight: 700; font-size: 1.05rem; border-bottom: 2px solid rgba(0, 212, 255, 0.3); width: 260px;">Feature</th>
+                        <th style="padding: 1.2rem 0.9rem; text-align: center; color: #00d4ff; font-weight: 700; font-size: 1rem; border-bottom: 2px solid rgba(0, 212, 255, 0.3); background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%);">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.7rem;">
+                                <img src="vitanexus-logo.png" alt="VitaNexus" style="width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0, 255, 136, 0.4);">
+                                <span style="color: #00ff88; font-weight: 700;">VitaNexus</span>
+                            </div>
+                        </th>
+                        <th style="padding: 1.2rem 0.9rem; text-align: center; color: #00d4ff; font-weight: 700; font-size: 1rem; border-bottom: 2px solid rgba(0, 212, 255, 0.3);">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.7rem;">
+                                <img src="myfitnesspal-logo.png" alt="MyFitnessPal" style="width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2); background: #0066FF; padding: 7px;">
+                                <span style="color: #94a3b8; font-weight: 600;">MyFitnessPal</span>
+                            </div>
+                        </th>
+                        <th style="padding: 1.2rem 0.9rem; text-align: center; color: #00d4ff; font-weight: 700; font-size: 1rem; border-bottom: 2px solid rgba(0, 212, 255, 0.3);">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.7rem;">
+                                <img src="strava-logo.svg" alt="Strava" style="width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2);">
+                                <span style="color: #94a3b8; font-weight: 600;">Strava</span>
+                            </div>
+                        </th>
+                        <th style="padding: 1.2rem 0.9rem; text-align: center; color: #00d4ff; font-weight: 700; font-size: 1rem; border-bottom: 2px solid rgba(0, 212, 255, 0.3);">
+                            <div style="display: flex; flex-direction: column; align-items: center; gap: 0.7rem;">
+                                <img src="freeletics-logo.png" alt="Freeletics" style="width: 45px; height: 45px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0, 212, 255, 0.2); background: #1a1a1a; padding: 7px;">
+                                <span style="color: #94a3b8; font-weight: 600;">Freeletics</span>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Summary Row -->
+                    <tr style="background: rgba(15, 23, 42, 0.3);">
+                        <td style="padding: 1rem 0.9rem; border-bottom: 1px solid rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; font-size: 1rem;">Summary</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; color: #cbd5e1; font-size: 0.92rem; line-height: 1.6; border-bottom: 1px solid rgba(0, 212, 255, 0.1); background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);">AI-driven wellness app combining training, nutrition, and recovery for sustainable results</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; color: #94a3b8; font-size: 0.92rem; line-height: 1.6; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">Nutrition and calorie tracking app with basic exercise logging</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; color: #94a3b8; font-size: 0.92rem; line-height: 1.6; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">Social fitness app for tracking outdoor performance and sharing activities</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; color: #94a3b8; font-size: 0.92rem; line-height: 1.6; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">AI-based home workout app focusing on high-intensity, bodyweight training</td>
+                    </tr>
+
+                    <!-- AI Personalisation Row -->
+                    <tr style="background: rgba(26, 35, 50, 0.3);">
+                        <td style="padding: 1rem 0.9rem; border-bottom: 1px solid rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; font-size: 1rem;">AI Personalisation</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1); background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 255, 136, 0.2)" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.5;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 212, 255, 0.1)" stroke="#00d4ff" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                    </tr>
+
+                    <!-- Nutrition Tracking Row -->
+                    <tr style="background: rgba(15, 23, 42, 0.3);">
+                        <td style="padding: 1rem 0.9rem; border-bottom: 1px solid rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; font-size: 1rem;">Nutrition Tracking</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1); background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 255, 136, 0.2)" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.5;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 212, 255, 0.1)" stroke="#00d4ff" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                    </tr>
+
+                    <!-- Recovery Guidance Row -->
+                    <tr style="background: rgba(26, 35, 50, 0.3);">
+                        <td style="padding: 1rem 0.9rem; border-bottom: 1px solid rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; font-size: 1rem;">Recovery Guidance</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1); background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 255, 136, 0.2)" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                    </tr>
+
+                    <!-- Mental Health Row -->
+                    <tr style="background: rgba(15, 23, 42, 0.3);">
+                        <td style="padding: 1rem 0.9rem; border-bottom: 1px solid rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; font-size: 1rem;">Mental Health</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1); background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 255, 136, 0.2)" stroke="#00ff88" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00ff88" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                    </tr>
+
+                    <!-- Branding and Marketing Row -->
+                    <tr style="background: rgba(26, 35, 50, 0.3);">
+                        <td style="padding: 1rem 0.9rem; border-bottom: 1px solid rgba(0, 212, 255, 0.1); color: #00d4ff; font-weight: 600; font-size: 1rem;">Branding and Marketing</td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1); background: linear-gradient(135deg, rgba(0, 255, 136, 0.05) 0%, rgba(0, 212, 255, 0.05) 100%);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.3;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(148, 163, 184, 0.1)" stroke="#94a3b8" stroke-width="2"/>
+                                <path d="M12 12 L20 20 M20 12 L12 20" stroke="#94a3b8" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.5;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 212, 255, 0.1)" stroke="#00d4ff" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.5;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 212, 255, 0.1)" stroke="#00d4ff" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                        <td style="padding: 1rem 0.9rem; text-align: center; border-bottom: 1px solid rgba(0, 212, 255, 0.1);">
+                            <svg width="30" height="30" viewBox="0 0 32 32" style="display: inline-block; opacity: 0.5;">
+                                <circle cx="16" cy="16" r="14" fill="rgba(0, 212, 255, 0.1)" stroke="#00d4ff" stroke-width="2"/>
+                                <path d="M10 16 L14 20 L22 12" stroke="#00d4ff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h4 style="color: #00ff88; margin: 2rem 0 0.8rem; font-weight: 700; font-size: 1.25rem;">Competitive Advantage</h4>
+        
+        <div class="highlight-box" style="background: linear-gradient(135deg, rgba(0, 255, 81, 0.15) 0%, rgba(0, 255, 102, 0.08) 100%); margin-top: 0.8rem;">
+        <strong style="color: #00ff88;">VitaNexus</strong> offers an <strong style="color: #00ff88;">all-in-one integration</strong> that competitors overlook, addressing often-ignored areas of health by prioritising <strong style="color: #00ff88;">mental health</strong> and introducing a unique <strong style="color: #03ff88;">focus on recovery guidance.</strong> Hence, positioning VitaNexus ahead of competitors.
+        </div>
+
+        <h4 style="color: #ef4444; margin: 1.2rem 0 0.8rem; font-weight: 700; font-size: 1.25rem;">Competitive Disadvantage</h4>
+        
+        <div class="highlight-box" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%); margin-top: 0.8rem;">
+            Reliance on advanced technology increases the <strong style="color: #ef4444;">risk of data breaches,</strong> while <strong style="color: #ef4444;">limited visibility and brand awareness</strong> may <strong style="color: #ef4444;">reduce inital user engagement</strong> compared to well-established competitors.
+        </div>
+    </div>
+</section>
+
+<!-- d. Sales and Marketing Plans -->
+<section class="market-section">
+    <div class="section-header">
+        <h2 class="section-title">Sales and Marketing Plans</h2>
+    </div>
+    
+    <div class="content-card">
+        <div class="flip-cards-container">
+            <!-- GET Card -->
+            <div class="flip-card" data-color="blue">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-icon">🎯</div>
+                        <h3>GET</h3>
+                        <p class="card-subtitle">Acquire Customers</p>
+                        <div class="flip-hint">
+                            <span>Click to explore</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="back-header">
+                            <div class="back-icon">🎯</div>
+                            <h4>GET: Acquire Customers</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>Increase brand awareness through collaborations, local events, and gym partnerships.</li>
+                            <li>Digital advertising (Instagram, TikTok, and YouTube).</li>
+                            <li>App Store Optimisation (ASO): Increase app visibility and downloads through optimised keywords, visuals, and ratings.</li>
+                            <li>Engage the community with Referral rewards program.</li>
+                        </ul>
+                        <div class="flip-hint">
+                            <span>Click to go back</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KEEP Card -->
+            <div class="flip-card" data-color="green">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-icon">🤝</div>
+                        <h3>KEEP</h3>
+                        <p class="card-subtitle">Retain Users</p>
+                        <div class="flip-hint">
+                            <span>Click to explore</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="back-header">
+                            <div class="back-icon">🤝</div>
+                            <h4>KEEP: Retain Users</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>Provide high service quality and attentive follow-up.</li>
+                            <li>Offer loyalty through programs.</li>
+                            <li>24/7 AI chatbot support.</li>
+                            <li>Offer personalised services based on user needs.</li>
+                            <li>Mental health check-ins.</li>
+                        </ul>
+                        <div class="flip-hint">
+                            <span>Click to go back</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GROW Card -->
+            <div class="flip-card" data-color="purple">
+                <div class="flip-card-inner">
+                    <div class="flip-card-front">
+                        <div class="card-icon">📈</div>
+                        <h3>GROW</h3>
+                        <p class="card-subtitle">Expand Value</p>
+                        <div class="flip-hint">
+                            <span>Click to explore</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="flip-card-back">
+                        <div class="back-header">
+                            <div class="back-icon">📈</div>
+                            <h4>GROW: Expand Value</h4>
+                        </div>
+                        <ul class="strategy-list">
+                            <li>Free premium trials to encourage positive word-of-mouth</li>
+                            <li>Global expansion</li>
+                            <li>Affiliate sales (wearables, supplements, and fitness equipment)</li>
+                        </ul>
+                        <div class="flip-hint">
+                            <span>Click to go back</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Instagram Content Showcase -->
+        <div style="margin-top: 3rem; padding: 2.5rem; background: linear-gradient(135deg, rgba(131, 58, 180, 0.05), rgba(225, 48, 108, 0.05)); border-radius: 24px; border: 2px solid rgba(225, 48, 108, 0.2);">
+            
+            <!-- Info Banner -->
+            <div style="background: linear-gradient(135deg, #E1306C, #833AB4); padding: 1.25rem 1.75rem; border-radius: 16px; margin-bottom: 2.5rem; text-align: center; box-shadow: 0 8px 32px rgba(225, 48, 108, 0.3);">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+                    <div style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); padding: 0.65rem 1.3rem; border-radius: 12px; display: flex; align-items: center; gap: 0.7rem;">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                        <span style="color: white; font-weight: 700; font-size: 1.05rem;">Digital Marketing</span>
+                    </div>
+                </div>
+                <p style="color: white; margin-top: 0.9rem; font-size: 0.98rem; font-weight: 500; max-width: 800px; margin-left: auto; margin-right: auto;">
+                    Engaging visual content and promotional campaigns drive brand awareness and convert followers into active users through compelling calls-to-action.
+                </p>
+            </div>
+            
+            <div style="max-width: 480px; margin: 0 auto;">
+                
+                <!-- Instagram Mock -->
+                <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 20px 60px rgba(0, 0, 0, 0.25)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 12px 40px rgba(0, 0, 0, 0.15)'">
+                    <!-- Instagram Header -->
+                    <div style="padding: 0.9rem; border-bottom: 1px solid #efefef; display: flex; align-items: center; gap: 0.7rem;">
+                        <div style="width: 38px; height: 38px; background: linear-gradient(135deg, #833AB4, #E1306C, #FD1D1D); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 1.1rem;">V</div>
+                        <div style="flex: 1;">
+                            <div style="font-weight: 700; font-size: 0.88rem; color: #262626;">vitanexus_app</div>
+                            <div style="font-size: 0.73rem; color: #8e8e8e;">Adelaide, SA</div>
+                        </div>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2">
+                            <circle cx="12" cy="12" r="1"></circle>
+                            <circle cx="19" cy="12" r="1"></circle>
+                            <circle cx="5" cy="12" r="1"></circle>
+                        </svg>
+                    </div>
+                    
+                    <!-- Instagram Image -->
+                    <div style="aspect-ratio: 1/1; background: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=800&fit=crop') center/cover; display: flex; align-items: flex-end; justify-content: center; position: relative;">
+                        <!-- Overlay gradient for better text visibility -->
+                        <div style="position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 50%);"></div>
+                        
+                        <!-- Text overlay -->
+                        <div style="position: relative; text-align: center; color: white; padding: 1.75rem; z-index: 1;">
+                            <div style="background: rgba(225, 48, 108, 0.95); backdrop-filter: blur(10px); padding: 0.9rem 1.75rem; border-radius: 16px; display: inline-block; margin-bottom: 0.9rem; box-shadow: 0 8px 32px rgba(0,0,0,0.3);">
+                                <div style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.2rem; text-transform: uppercase; letter-spacing: 1px;">FREE 30-DAY</div>
+                                <div style="font-size: 1.05rem; font-weight: 600;">Premium Trial</div>
+                            </div>
+                        </div>
+                        
+                        <!-- REEL badge -->
+                        <div style="position: absolute; top: 0.9rem; right: 0.9rem; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 0.45rem 0.9rem; border-radius: 20px; font-size: 0.72rem; font-weight: 700; color: #E1306C; display: flex; align-items: center; gap: 0.45rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12.823 1l2.974 5.002h-5.58l-2.65-4.971c.206-.013.419-.022.642-.027L8.55 1zm2.327 0h.298c3.06 0 4.468.754 5.64 1.887a6.007 6.007 0 011.596 2.82l.07.295h-4.629L15.15 1zm-9.667.377L7.95 6.002H1.244a6.01 6.01 0 013.942-4.53zm9.735 12.834l-4.545-2.624a.909.909 0 00-1.356.668l-.008.12v5.248a.91.91 0 001.255.84l.109-.053 4.545-2.624a.909.909 0 00.1-1.507l-.1-.068-4.545-2.624zm-14.2-6.209h21.964l.015.36.003.189v6.899c0 3.061-.755 4.469-1.888 5.64-1.151 1.114-2.5 1.856-5.33 1.909l-.334.003H8.551c-3.06 0-4.467-.755-5.64-1.889-1.114-1.15-1.854-2.498-1.908-5.33L1 15.45V8.551l.003-.189z"/>
+                            </svg>
+                            REEL
+                        </div>
+                    </div>
+                    
+                    <!-- Instagram Actions -->
+                    <div style="padding: 0.9rem;">
+                        <div style="display: flex; gap: 0.9rem; margin-bottom: 0.7rem;">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" style="cursor: pointer;">
+                                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                            </svg>
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" style="cursor: pointer;">
+                                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+                            </svg>
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" style="cursor: pointer;">
+                                <line x1="22" y1="2" x2="11" y2="13"></line>
+                                <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                            </svg>
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#262626" stroke-width="2" style="margin-left: auto; cursor: pointer;">
+                                <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                        </div>
+                        <div style="font-weight: 600; font-size: 0.83rem; color: #262626; margin-bottom: 0.45rem;">12,847 likes</div>
+                        <div style="font-size: 0.83rem; color: #262626; line-height: 1.5;">
+                            <span style="font-weight: 600;">vitanexus_app</span> 🎉 Start your fitness journey TODAY with our FREE 30-day Premium trial! 💪 Get personalised workouts, AI nutrition plans, and 24/7 support. Link in bio! 🔥
+                            <div style="margin-top: 0.45rem;">
+                                <span style="color: #00376b; font-weight: 500;">#FitnessGoals #HealthyLifestyle #FreeTrial #VitaNexus #WorkoutMotivation</span>
+                            </div>
+                        </div>
+                        <div style="color: #8e8e8e; font-size: 0.72rem; margin-top: 0.7rem;">View all 342 comments</div>
+                        <div style="color: #8e8e8e; font-size: 0.68rem; margin-top: 0.45rem; text-transform: uppercase;">2 HOURS AGO</div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+</div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 VitaNexus. All rights reserved.</p>
+            <div class="footer-meta">
+                <span><strong>Sace ID:</strong> 323000R</span>
+                <span><strong>Word Count:</strong> 1697</span>
+            </div>
+        </div>
+    </footer>
+
+<script>
+    // Scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 100) {
+            nav.style.background = 'rgba(15, 23, 42, 0.98)';
+        } else {
+            nav.style.background = 'rgba(15, 23, 42, 0.95)';
+        }
+    });
+
+    // Scroll reveal animation
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+                
+                // Trigger chart animation when visible
+                if (entry.target.classList.contains('research-stat')) {
+                    entry.target.classList.add('in-view');
+                }
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.market-section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(30px)';
+        section.style.transition = 'all 0.6s ease';
+        observer.observe(section);
+    });
+
+    // Observe research stats for chart animation
+    document.querySelectorAll('.research-stat').forEach(stat => {
+        observer.observe(stat);
+    });
+
+    // Flip card functionality
+    document.querySelectorAll('.flip-card').forEach(card => {
+        card.addEventListener('click', function() {
+            this.classList.toggle('flipped');
+        });
+    });
+
+    // Optional: Auto-flip on hover (desktop only)
+    if (window.innerWidth > 768) {
+        document.querySelectorAll('.flip-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                if (!this.classList.contains('flipped')) {
+                    // Optional: uncomment to enable auto-flip on hover
+                    // this.classList.add('flipped');
+                }
+            });
+        });
+    }
+</script>
+</body>
+</html>

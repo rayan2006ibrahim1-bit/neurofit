@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VitaNexus - The Finance</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            zoom: 0.75;
+            -moz-transform: scale(0.75);
+            -moz-transform-origin: 0 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: rotate(10deg) scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.15rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .nav-links a.active {
+            color: #00ff88;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 8rem;
+            position: relative;
+        }
+
+        /* Background Effects */
+        .container::before {
+            content: '';
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+            top: 10%;
+            right: -200px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .container::after {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1), transparent);
+            bottom: 10%;
+            left: -150px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite 2s;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Page Header */
+        .page-header {
+            text-align: center;
+            padding: 2rem 0;
+            margin-bottom: 1rem;
+            animation: fadeInScale 0.8s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #00ffaa;
+            margin-bottom: 1rem;
+            letter-spacing: -3px;
+            line-height: 1;
+        }
+
+        /* Section Styles */
+        .finance-section {
+            margin-bottom: 3rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            letter-spacing: -1px;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        /* Text Content Styles */
+        .text-content {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .text-content h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .text-content h4 {
+            color: #8b5cf6;
+            font-size: 1.2rem;
+            margin: 1.2rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+
+        .text-content p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .text-content ul, .text-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .text-content li {
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
+        .text-content strong {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* Grid Layouts */
+        .two-column-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .three-column-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        /* Feature Cards */
+        .feature-card {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(6, 182, 212, 0.02));
+            border: 2px solid rgba(6, 182, 212, 0.3);
+            border-radius: 16px;
+            padding: 1.8rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(6, 182, 212, 0.3);
+            border-color: #06b6d4;
+        }
+
+        .feature-card.green {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(16, 185, 129, 0.02));
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .feature-card.green:hover {
+            box-shadow: 0 12px 32px rgba(16, 185, 129, 0.3);
+            border-color: #10b981;
+        }
+
+        .feature-card.purple {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(139, 92, 246, 0.02));
+            border-color: rgba(139, 92, 246, 0.3);
+        }
+
+        .feature-card.purple:hover {
+            box-shadow: 0 12px 32px rgba(139, 92, 246, 0.3);
+            border-color: #8b5cf6;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 1.2rem;
+            background: linear-gradient(135deg, #06b6d4, #0891b2);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.4);
+        }
+
+        .feature-card.green .feature-icon {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .feature-card.purple .feature-icon {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        .feature-card h4 {
+            color: #06b6d4;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .feature-card.green h4 {
+            color: #10b981;
+        }
+
+        .feature-card.purple h4 {
+            color: #8b5cf6;
+        }
+
+        .feature-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            text-align: center;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 1.5rem 0;
+            background: rgba(30, 41, 59, 0.3);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: rgba(30, 41, 59, 0.5);
+            color: #94a3b8;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            color: #cbd5e1;
+        }
+
+        .data-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        .data-table tfoot td {
+            background: rgba(30, 41, 59, 0.4);
+            font-weight: 600;
+            color: #e2e8f0;
+            border-top: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid #00d4ff;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #cbd5e1;
+            font-size: 1.05rem;
+        }
+
+        .highlight-box h4 {
+            color: #a78bfa;
+            margin-bottom: 0.8rem;
+        }
+
+        /* Chart Container */
+        .chart-container {
+            position: relative;
+            height: 500px;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 212, 255, 0.2);
+            padding: 2rem 5%;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-content p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin: 0;
+        }
+
+        .footer-meta {
+            display: flex;
+            gap: 2rem;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+
+        .footer-meta span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .footer-meta strong {
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            html {
+                zoom: 0.6;
+            }
+
+            .three-column-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .two-column-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            html {
+                zoom: 0.55;
+            }
+
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: -2px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .logo img {
+                height: 28px;
+                width: 28px;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .nav-links a {
+                font-size: 0.9rem;
+            }
+
+            .container {
+                padding: 1rem;
+                padding-top: 6rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            html {
+                zoom: 0.5;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+                letter-spacing: -1px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="vitanexus-logo.png" alt="VitaNexus Logo">
+                <span class="logo-text">VitaNexus</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">The Pitch</a></li>
+                <li><a href="business.html">The Business</a></li>
+                <li><a href="market.html">The Market</a></li>
+                <li><a href="strategy.html">The Strategy</a></li>
+                <li><a href="finance.html" class="active">The Finance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>The Finance</h1>
+        </div>
+
+        <!-- Revenue Streams Section -->
+        <section class="finance-section">
+            <div class="section-header">
+                <h2 class="section-title">Revenue Streams</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="text-content">
+                    <h3>Subscription-Based Model (Primary)</h3>
+                    
+                    <div class="three-column-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg width="40" height="40" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="4"/>
+                                    <text x="50" y="65" text-anchor="middle" fill="white" font-size="40" font-weight="bold">F</text>
+                                </svg>
+                            </div>
+                            <h4>Basic Plan</h4>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: #00ff88; margin: 1rem 0;">Free</p>
+                            <ul style="text-align: left; list-style: none; padding: 0;">
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #00ff88;">✓</span> Standard activity tracking
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #00ff88;">✓</span> Limited AI recommendations
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #00ff88;">✓</span> Basic progress reports
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #00ff88;">✓</span> Community access
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="feature-card green">
+                            <div class="feature-icon">
+                                <svg width="40" height="40" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="4"/>
+                                    <text x="50" y="65" text-anchor="middle" fill="white" font-size="35" font-weight="bold">$</text>
+                                </svg>
+                            </div>
+                            <h4>Premium Monthly</h4>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: #00ff88; margin: 1rem 0;">$14.99/mo</p>
+                            <ul style="text-align: left; list-style: none; padding: 0;">
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #10b981;">✓</span> Advanced AI insights
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #10b981;">✓</span> Adaptive coaching
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #10b981;">✓</span> In-depth data visualisation
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #10b981;">✓</span> Personalised meal plans
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #10b981;">✓</span> Recovery guidance
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card purple">
+                            <div class="feature-icon">
+                                <svg width="40" height="40" viewBox="0 0 100 100">
+                                    <path d="M 50 20 L 55 40 L 75 45 L 60 60 L 65 80 L 50 70 L 35 80 L 40 60 L 25 45 L 45 40 Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <h4>Premium Annual</h4>
+                            <p style="font-size: 1.5rem; font-weight: 700; color: #00ff88; margin: 1rem 0;">$144.99/yr</p>
+                            <div style="background: rgba(139, 92, 246, 0.2); padding: 0.5rem 0.8rem; border-radius: 8px; margin-bottom: 1rem; text-align: center;">
+                                <span style="color: #a78bfa; font-weight: 600; font-size: 0.95rem;">Save $34.89 (19% off)</span>
+                            </div>
+                            <ul style="text-align: left; list-style: none; padding: 0;">
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #8b5cf6;">✓</span> All Premium features
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #8b5cf6;">✓</span> Priority support
+                                </li>
+                                <li style="padding: 0.3rem 0; display: flex; align-items: center; gap: 0.5rem;">
+                                    <span style="color: #8b5cf6;">✓</span> Early feature access
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <h3>Partnerships and Affiliations (Secondary)</h3>
+
+                    <div class="three-column-grid">
+                        <div class="feature-card purple">
+                            <div class="feature-icon">
+                                <svg width="40" height="40" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="35" r="15" fill="none" stroke="white" stroke-width="3"/>
+                                    <path d="M 35 55 Q 35 45, 50 45 Q 65 45, 65 55 L 65 75 Q 65 80, 60 80 L 40 80 Q 35 80, 35 75 Z" fill="none" stroke="white" stroke-width="3"/>
+                                </svg>
+                            </div>
+                            <h4>Gym Partnerships</h4>
+                            <p>Commission on gym memberships and facility bookings</p>
+                        </div>
+                        
+                        <div class="feature-card purple">
+                            <div class="feature-icon">
+                                <svg width="40" height="40" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="3"/>
+                                    <path d="M 50 30 L 50 50 L 65 60" stroke="white" stroke-width="3" fill="none"/>
+                                </svg>
+                            </div>
+                            <h4>Nutrition Brands</h4>
+                            <p>Affiliate sales on supplements and healthy products</p>
+                        </div>
+                        
+                        <div class="feature-card purple">
+                            <div class="feature-icon">
+                                <svg width="40" height="40" viewBox="0 0 100 100">
+                                    <circle cx="35" cy="40" r="12" fill="none" stroke="white" stroke-width="3"/>
+                                    <circle cx="65" cy="40" r="12" fill="none" stroke="white" stroke-width="3"/>
+                                    <line x1="45" y1="40" x2="55" y2="40" stroke="white" stroke-width="3"/>
+                                </svg>
+                            </div>
+                            <h4>Wellness Organisations</h4>
+                            <p>Co-branded campaigns and cross-promotions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Considerable Factors Section -->
+        <section class="finance-section">
+            <div class="section-header">
+                <h2 class="section-title">Considerable Factors</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="two-column-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <svg width="40" height="40" viewBox="0 0 100 100">
+                                <rect x="25" y="30" width="50" height="40" rx="5" fill="none" stroke="white" stroke-width="3"/>
+                                <line x1="35" y1="45" x2="65" y2="45" stroke="white" stroke-width="2"/>
+                                <line x1="35" y1="55" x2="65" y2="55" stroke="white" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h4>Competitor Pricing</h4>
+                        <p>
+                            Competitor pricing served as the foundation for VitaNexus's pricing strategy, ensuring <strong>strong market positioning</strong> while maintaining affordability for users. However, due to the integration of <strong>proprietary AI systems</strong> and <strong>premium data analytics</strong>, prices are set slightly above average to sustain operational costs and ensure long-term profitability.
+                        </p>
+                    </div>
+
+                    <div class="feature-card green">
+                        <div class="feature-icon">
+                            <svg width="40" height="40" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="3"/>
+                                <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="3"/>
+                                <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="3"/>
+                            </svg>
+                        </div>
+                        <h4>Costs</h4>
+                        <p>
+                            Initial losses may occur through free trials, but this strategy is intentionally designed to drive <strong>user acquisition</strong> and conversion to paid Premium subscriptions. Over time, ensuring <strong>sustainable profit growth</strong> without compromising on quality or innovation.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Initial Startup Cost Section -->
+        <section class="finance-section">
+            <div class="section-header">
+                <h2 class="section-title">Initial Startup Cost</h2>
+            </div>
+            
+            <div class="content-card" style="padding-top: 1rem;">
+                <div class="text-content">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Estimated Cost (AUD)</th>
+                                <th>Frequency</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>App Development</td>
+                                <td style="color: #00ff88; font-weight: 700;">$50,000</td>
+                                <td>One-time</td>
+                            </tr>
+                            <tr>
+                                <td>Insurance</td>
+                                <td style="color: #00ff88; font-weight: 700;">$1,200</td>
+                                <td>Annual</td>
+                            </tr>
+                            <tr>
+                                <td>Platform Maintenance</td>
+                                <td style="color: #00ff88; font-weight: 700;">$60,000</td>
+                                <td>Annual</td>
+                            </tr>
+                            <tr>
+                                <td>Marketing & Promotion</td>
+                                <td style="color: #00ff88; font-weight: 700;">$36,000</td>
+                                <td>Annual</td>
+                            </tr>
+                            <tr>
+                                <td>Licensing & Legal Setup</td>
+                                <td style="color: #00ff88; font-weight: 700;">$5,000</td>
+                                <td>One-time</td>
+                            </tr>
+                            <tr>
+                                <td>Equipment & Software</td>
+                                <td style="color: #00ff88; font-weight: 700;">$8,000</td>
+                                <td>Annual</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total Startup Estimate</td>
+                                <td>$160,200</td>
+                                <td>Initial Year</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Initial Revenue Estimations Section -->
+        <section class="finance-section">
+            <div class="section-header">
+                <h2 class="section-title">Initial Revenue Estimations</h2>
+            </div>
+            
+            <div class="content-card" style="padding-top: 1rem;">
+                <div class="text-content">
+                    <div style="background: rgba(30, 41, 59, 0.6); border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0;">
+                        <p>
+                            VitaNexus's financial projections are grounded in realistic adoption rates within Australia's growing digital fitness market. Approximately <strong>39% (≈10.6 million)</strong> of Australian adults use fitness or health apps (Australian Institute of Fitness, 2024). Based on national download behaviour, an estimated average of <strong>4%</strong> of existing fitness-app users are likely to download a new app annually (42Matters, 2024), resulting in <strong>≈ 424,000 VitaNexus downloads</strong> during the first year.
+                        </p>
+                        <p style="margin-top: 1rem;">
+                            Although 71% of fitness-app users quit by the third month due to limitations (as discussed in The Market section), VitaNexus aims to address these issues through AI-driven personalisation and holistic tracking. Consequently, only <strong>30% of users are expected to churn</strong> within the first year, maintaining an estimated <strong>≈ 297,000 active users</strong>.
+                        </p>
+                    </div>
+
+                    <h4>Projected Subscription Revenue</h4>
+                    <p style="text-align: center; font-size: 1.1rem; margin: 1.2rem 0;">
+                        Assuming <strong>40%</strong> of users convert to premium subscriptions: <strong style="color: #00ff88;">≈ 118,800 Premium Users</strong>
+                    </p>
+
+                    <div class="two-column-grid">
+                        <div class="feature-card">
+                            <h4>Monthly Plan (70% of premium users)</h4>
+                            <ul style="text-align: left; list-style: none; padding: 0; margin: 1rem 0;">
+                                <li style="padding: 0.3rem 0; color: #00ff88; font-weight: 700; font-size: 1.1rem;"><strong>Total: $15,000,000 AUD</strong></li>
+                            </ul>
+                        </div>
+
+                        <div class="feature-card green">
+                            <h4>Annual Plan (30% of premium users)</h4>
+                            <ul style="text-align: left; list-style: none; padding: 0; margin: 1rem 0;">
+                                <li style="padding: 0.3rem 0; color: #10b981; font-weight: 700; font-size: 1.1rem;"><strong>Total: $5,300,000 AUD</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.2) 0%, rgba(0, 212, 255, 0.2) 100%); border-radius: 12px; padding: 1.2rem; text-align: center; border: 2px solid rgba(0, 255, 136, 0.4); margin: 1.5rem 0;">
+                        <p style="color: #cbd5e1; font-size: 1rem; margin-bottom: 0.4rem;">Total Subscription Revenue (Year 1)</p>
+                        <div style="font-size: 2.2rem; font-weight: 800; color: #00ff88;">$20,300,000 AUD</div>
+                    </div>
+
+                    <h4>Partnerships and Affiliate Revenue</h4>
+                    <p style="text-align: center; margin: 1.2rem 0;">
+                        Affiliate marketing typically accounts for an average of <strong>2%</strong> of total revenue in comparable health-tech businesses (IAB Australia, 2023). Hence:
+                    </p>
+
+                    <div style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%); border-radius: 12px; padding: 1.2rem; text-align: center; border: 1px solid rgba(139, 92, 246, 0.3); margin: 1.5rem 0;">
+                        <p style="color: #cbd5e1; font-size: 1rem; margin-bottom: 0.4rem;">Estimated Revenue (Year 1)</p>
+                        <div style="font-size: 1.8rem; font-weight: 800; color: #8b5cf6;">$406,000 AUD</div>
+                    </div>
+
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Source</th>
+                                <th style="text-align: right;">Projected Revenue (AUD)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Subscription Plans</td>
+                                <td style="text-align: right; color: #00ff88; font-weight: 700;">$20,300,000</td>
+                            </tr>
+                            <tr>
+                                <td>Partnerships & Affiliations</td>
+                                <td style="text-align: right; color: #00ff88; font-weight: 700;">$406,000</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td>Total Estimated Revenue</td>
+                                <td style="text-align: right;">$20,706,000 AUD</td>
+                            </tr>
+                            <tr style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.4) 0%, rgba(0, 212, 255, 0.4) 100%);">
+                                <td style="font-size: 1.3rem;">Net Profit (Year 1)</td>
+                                <td style="font-size: 1.3rem; text-align: right;">$20,545,800 AUD</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+<!-- Break-Even Analysis Section -->
+<section class="finance-section">
+    <div class="section-header">
+        <h2 class="section-title">Break-Even Analysis</h2>
+    </div>
+    
+    <div class="content-card">
+        <div class="text-content">
+            <h3 style="text-align: center; margin-bottom: 2rem;">Initial Year Calculations</h3>
+            
+            <div class="two-column-grid" style="align-items: center; gap: 2rem;">
+                <div>
+                    <div style="background: rgba(6, 182, 212, 0.05); padding: 1.5rem; border-radius: 8px; border-left: 4px solid #06b6d4;">
+                        <p style="line-height: 1.8; margin: 0;">
+                            VitaNexus will reach break-even when approximately <strong>943 premium users</strong> remain active, generating a total of <strong>$160,310 AUD</strong>, which covers all projected annual operating costs of <strong>$160,200</strong>. Given the projected <strong>252,450 active users</strong>, only <strong>0.37%</strong> of users need to convert to premium for VitaNexus to become profitable, a highly achievable target for a first-year digital fitness business.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center;">
+                    <img src="break-even-analysis.png" alt="Break-Even Analysis Graph" style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Three-Year Financial Summary Section -->
+        <section class="finance-section">
+            <div class="section-header">
+                <h2 class="section-title">Three-Year Financial Summary</h2>
+            </div>
+            
+            <div class="content-card" style="padding-top: 1rem;">
+                <div class="text-content">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Metric</th>
+                                <th style="text-align: right;">Year 1</th>
+                                <th style="text-align: right;">Year 2</th>
+                                <th style="text-align: right;">Year 3</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Total Revenue</strong></td>
+                                <td style="text-align: right; color: #00ff88; font-weight: 700;">$20,706,000</td>
+                                <td style="text-align: right; color: #00ff88; font-weight: 700;">$26,100,000</td>
+                                <td style="text-align: right; color: #00ff88; font-weight: 700;">$32,700,000</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Operating Costs</strong></td>
+                                <td style="text-align: right; color: #f87171; font-weight: 700;">$160,200</td>
+                                <td style="text-align: right; color: #f87171; font-weight: 700;">$2,800,000</td>
+                                <td style="text-align: right; color: #f87171; font-weight: 700;">$5,500,000</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.4) 0%, rgba(0, 212, 255, 0.4) 100%);">
+                                <td style="font-size: 1.3rem;"><strong>Net Profit</strong></td>
+                                <td style="font-size: 1.3rem; text-align: right; font-weight: 800;">$20,545,800</td>
+                                <td style="font-size: 1.3rem; text-align: right; font-weight: 800;">$23,300,000</td>
+                                <td style="font-size: 1.3rem; text-align: right; font-weight: 800;">$27,200,000</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <!-- Chart -->
+                    <div class="chart-container">
+                        <canvas id="financialChart"></canvas>
+                    </div>
+
+                    <div style="background: rgba(6, 182, 212, 0.05); border-left: 4px solid #00d4ff; padding: 1.5rem; margin: 2rem 0; border-radius: 8px;">
+                        <h4 style="color: #00d4ff; margin-bottom: 1rem;">Growth Analysis</h4>
+                        <p style="margin-bottom: 1rem;">
+                        </p>
+                        <ul style="margin-left: 1.5rem; color: #cbd5e1;">
+                            <li style="margin-bottom: 0.5rem;"><strong>Expanding user base:</strong> Strategic marketing and brand awareness campaigns attract new users while AI-driven personalisation improves retention rates</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Enhanced premium offerings:</strong> Introduction of advanced features and cross-platform integration increases conversion rates and lifetime value</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Strategic partnerships:</strong> Growing affiliate and partnership revenue through expanded collaborations with gyms, wellness brands, and international networks</li>
+                            <li style="margin-bottom: 0.5rem;"><strong>Market expansion:</strong> Geographic expansion into Brisbane, Perth, and international markets creates new revenue opportunities</li>
+                        </ul>
+                        <p style="margin-top: 1rem;">
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 VitaNexus. All rights reserved.</p>
+            <div class="footer-meta">
+                <span><strong>Sace ID:</strong> 323000R</span>
+                <span><strong>Word Count:</strong> 1697</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Financial Chart
+        const ctx = document.getElementById('financialChart').getContext('2d');
+        
+        const financialChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: ['Year 1', 'Year 2', 'Year 3'],
+                datasets: [
+                    {
+                        label: 'Total Revenue',
+                        data: [20706000, 26100000, 32700000],
+                        borderColor: '#00ff88',
+                        backgroundColor: 'rgba(0, 255, 136, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#00ff88',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Operating Costs',
+                        data: [160200, 2800000, 5500000],
+                        borderColor: '#f87171',
+                        backgroundColor: 'rgba(248, 113, 113, 0.1)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#f87171',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2
+                    },
+                    {
+                        label: 'Net Profit',
+                        data: [20545800, 23300000, 27200000],
+                        borderColor: '#00d4ff',
+                        backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                        borderWidth: 4,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 7,
+                        pointHoverRadius: 9,
+                        pointBackgroundColor: '#00d4ff',
+                        pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        borderDash: []
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                        labels: {
+                            color: '#cbd5e1',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            },
+                            padding: 20,
+                            usePointStyle: true,
+                            pointStyle: 'circle'
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'Three-Year Financial Projection',
+                        color: '#00d4ff',
+                        font: {
+                            size: 20,
+                            weight: 'bold'
+                        },
+                        padding: {
+                            top: 10,
+                            bottom: 30
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                        titleColor: '#00d4ff',
+                        bodyColor: '#cbd5e1',
+                        borderColor: '#00d4ff',
+                        borderWidth: 1,
+                        padding: 12,
+                        displayColors: true,
+                        callbacks: {
+                            label: function(context) {
+                                let label = context.dataset.label || '';
+                                if (label) {
+                                    label += ': ';
+                                }
+                                label += '$' + context.parsed.y.toLocaleString();
+                                return label;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 12
+                            },
+                            callback: function(value) {
+                                return '$' + (value / 1000000).toFixed(1) + 'M';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.1)',
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Amount (AUD)',
+                            color: '#cbd5e1',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#94a3b8',
+                            font: {
+                                size: 12
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(148, 163, 184, 0.1)',
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Year',
+                            color: '#cbd5e1',
+                            font: {
+                                size: 14,
+                                weight: '600'
+                            }
+                        }
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
+                }
+            }
+        });
+
+        // Scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(15, 23, 42, 0.98)';
+            } else {
+                nav.style.background = 'rgba(15, 23, 42, 0.95)';
+            }
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.finance-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'all 0.6s ease';
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

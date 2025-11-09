@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Plan - VitaNexus</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            zoom: 0.75;
+            -moz-transform: scale(0.75);
+            -moz-transform-origin: 0 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #e2e8f0;
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 2rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 45px;
+            width: 45px;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover img {
+            transform: rotate(10deg) scale(1.05);
+        }
+
+        .logo-text {
+            font-size: 2.2rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.15rem; 
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        .nav-links a.active {
+            color: #00ff88;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+            padding-top: 8rem;
+            position: relative;
+        }
+
+        /* Background Effects */
+        .container::before {
+            content: '';
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1), transparent);
+            top: 10%;
+            right: -200px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .container::after {
+            content: '';
+            position: fixed;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0, 255, 136, 0.1), transparent);
+            bottom: 10%;
+            left: -150px;
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite 2s;
+            z-index: -1;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        /* Page Header - Text Only Styled */
+        .page-header {
+            text-align: center;
+            padding: 2rem 0 1rem 0;
+            margin-bottom: 2rem;
+            animation: fadeInScale 0.8s ease;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            color: #00ffaa;
+            margin-bottom: 0;
+            letter-spacing: -3px;
+            line-height: 1;
+        }
+
+        /* Section Styles */
+        .business-section {
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #cbd5e1;
+            letter-spacing: -1px;
+        }
+
+        .content-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .content-card:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.1);
+        }
+
+        /* Organizational Chart Styles */
+        .org-chart-container {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .org-chart-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .org-chart-header h3 {
+            font-size: 2rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .org-chart-header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+
+        .org-chart {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .org-level {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 2rem;
+            width: 100%;
+            flex-wrap: wrap;
+        }
+
+        .org-box {
+            background: rgba(26, 35, 50, 0.8);
+            border: 2px solid;
+            border-radius: 12px;
+            padding: 1.5rem;
+            min-width: 200px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .org-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.3);
+        }
+
+        .org-box.ceo {
+            border-color: #00d4ff;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(26, 35, 50, 0.8));
+        }
+
+        .org-box.cto {
+            border-color: #8b5cf6;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(26, 35, 50, 0.8));
+        }
+
+        .org-box.coo {
+            border-color: #00ff88;
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(26, 35, 50, 0.8));
+        }
+
+        .org-box.cmo {
+            border-color: #fbbf24;
+            background: linear-gradient(135deg, rgba(251, 191, 36, 0.1), rgba(26, 35, 50, 0.8));
+        }
+
+        .org-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            letter-spacing: -0.5px;
+        }
+
+        .org-box.ceo .org-title {
+            color: #00d4ff;
+        }
+
+        .org-box.cto .org-title {
+            color: #8b5cf6;
+        }
+
+        .org-box.coo .org-title {
+            color: #00ff88;
+        }
+
+        .org-box.cmo .org-title {
+            color: #fbbf24;
+        }
+
+        .org-responsibilities {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .org-responsibilities li {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+        }
+
+        .org-responsibilities li:last-child {
+            border-bottom: none;
+        }
+
+        .org-connector {
+            width: 2px;
+            height: 30px;
+            background: linear-gradient(to bottom, #00d4ff, transparent);
+            margin: 0 auto;
+        }
+
+        .org-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        /* App Showcase Section */
+        .app-showcase {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(139, 92, 246, 0.05));
+            border-radius: 20px;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+        }
+
+        .app-showcase-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .app-showcase-header h3 {
+            font-size: 2rem;
+            color: #00d4ff;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .app-showcase-header p {
+            color: #94a3b8;
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .app-screens {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+
+        .app-screens img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .app-screens img:hover {
+            transform: scale(1.05);
+        }
+
+        .app-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 3rem;
+        }
+
+        .app-feature-card {
+            background: rgba(26, 35, 50, 0.6);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .app-feature-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.2);
+        }
+
+        .app-feature-card h4 {
+            color: #00d4ff;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .app-feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .feature-icon {
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+        }
+
+        /* Vision, Purpose, Values - Creative Layout */
+        .vpv-card {
+            background: rgba(26, 35, 50, 0.4);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            border: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .vpv-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 8px 32px rgba(0, 212, 255, 0.2);
+        }
+
+        .vision-card {
+            border-color: rgba(0, 212, 255, 0.3);
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05), rgba(26, 35, 50, 0.4));
+        }
+
+        .purpose-card {
+            border-color: rgba(0, 255, 136, 0.3);
+            background: linear-gradient(135deg, rgba(0, 255, 136, 0.05), rgba(26, 35, 50, 0.4));
+        }
+
+        .vpv-icon {
+            flex-shrink: 0;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vpv-label {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+        }
+
+        .vision-card .vpv-label {
+            color: #00d4ff;
+        }
+
+        .purpose-card .vpv-label {
+            color: #00ff88;
+        }
+
+        .vpv-content {
+            color: #94a3b8;
+            line-height: 1.7;
+            font-size: 1rem;
+            flex: 1;
+        }
+
+        .vpv-content strong {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* Values Compact Grid */
+        .values-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(26, 35, 50, 0.3);
+            border-radius: 16px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+
+        .values-compact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .value-compact-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.2rem;
+            background: rgba(26, 35, 50, 0.4);
+            border-radius: 12px;
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .value-compact-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.15);
+        }
+
+        .value-compact-icon {
+            flex-shrink: 0;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .value-compact-text {
+            flex: 1;
+        }
+
+        .value-compact-text strong {
+            display: block;
+            color: #cbd5e1;
+            font-size: 1rem;
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .value-compact-text p {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        /* Text Content Styles */
+        .text-content {
+            color: #94a3b8;
+            line-height: 1.8;
+            font-size: 1rem;
+        }
+
+        .text-content h3 {
+            color: #00d4ff;
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+            font-weight: 600;
+        }
+
+        .text-content h4 {
+            color: #8b5cf6;
+            font-size: 1.2rem;
+            margin: 1.2rem 0 0.8rem 0;
+            font-weight: 600;
+        }
+
+        .text-content p {
+            margin-bottom: 1rem;
+        }
+
+        .text-content ul, .text-content ol {
+            margin: 1rem 0 1rem 2rem;
+        }
+
+        .text-content li {
+            margin-bottom: 0.5rem;
+            color: #94a3b8;
+        }
+
+        .text-content strong {
+            color: #cbd5e1;
+            font-weight: 600;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(0, 212, 255, 0.05);
+            border-left: 4px solid #00d4ff;
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: #cbd5e1;
+        }
+
+        /* Table Styles */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(26, 35, 50, 0.4);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: rgba(0, 212, 255, 0.1);
+            color: #00d4ff;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0, 212, 255, 0.1);
+            color: #94a3b8;
+        }
+
+        .data-table tr:hover {
+            background: rgba(0, 212, 255, 0.05);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, #00d4ff, #8b5cf6);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-bottom: 2rem;
+        }
+
+        .back-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 212, 255, 0.3);
+        }
+
+/* Footer Styles */
+footer {
+    background: rgba(15, 23, 42, 0.95);
+    border-top: 2px solid rgba(0, 212, 255, 0.3);
+    padding: 2rem 5%;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-content p {
+    color: #94a3b8;
+    font-size: 1rem;
+    margin: 0;
+}
+
+.footer-meta {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-meta span {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+}
+
+.footer-meta strong {
+    color: #00d4ff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .footer-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}
+
+
+        @media (max-width: 480px) {
+            html {
+                zoom: 0.5;
+            }
+
+            .page-header h1 {
+                font-size: 2.2rem;
+                letter-spacing: -1px;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .content-card {
+                padding: 1.5rem;
+            }
+
+            .app-showcase {
+                padding: 1.5rem;
+            }
+
+            .org-chart-container {
+                padding: 1.5rem;
+            }
+
+            .vpv-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .vpv-icon svg {
+                width: 60px;
+                height: 60px;
+            }
+
+            .vpv-label {
+                font-size: 1.5rem;
+            }
+
+            .vpv-content {
+                font-size: 0.9rem;
+            }
+
+            .value-compact-icon {
+                width: 50px;
+                height: 50px;
+            }
+
+            .value-compact-icon svg {
+                width: 50px;
+                height: 50px;
+            }
+
+            .value-compact-text strong {
+                font-size: 0.9rem;
+            }
+
+            .value-compact-text p {
+                font-size: 0.8rem;
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                transform: translate(-5px, -5px) scale(1.05);
+            }
+            50% {
+                transform: translate(5px, -10px) scale(0.95);
+            }
+            75% {
+                transform: translate(-5px, 5px) scale(1.02);
+            }
+        }
+
+        .swot-circle {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .swot-box:hover .swot-circle {
+            animation: float 3s ease-in-out infinite, pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="vitanexus-logo.png" alt="VitaNexus Logo">
+                <span class="logo-text">VitaNexus</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">The Pitch</a></li>
+                <li><a href="business.html" class="active">The Business</a></li>
+                <li><a href="market.html">The Market</a></li>
+                <li><a href="strategy.html">The Strategy</a></li>
+                <li><a href="finance.html">The Finance</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>The Business</h1>
+        </div>
+
+        <!-- Vision, Purpose, and Values -->
+        <section class="business-section">
+            <div class="content-card">
+                <!-- Vision and Purpose Cards Side by Side -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 0rem;">
+                    <!-- Vision Card -->
+                    <div class="vpv-card vision-card">
+                        <div class="vpv-icon">
+                            <svg width="80" height="80" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="30" fill="none" stroke="#00d4ff" stroke-width="3"/>
+                                <circle cx="50" cy="50" r="10" fill="#00d4ff"/>
+                                <path d="M 20 50 Q 35 30, 50 50 Q 65 70, 80 50" stroke="#00d4ff" stroke-width="2" fill="none"/>
+                            </svg>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="vpv-label" style="font-size: 1.8rem;">Vision</div>
+                            <div class="vpv-content" style="font-size: 1.1rem;">
+                                To become a global leader in intelligent health and fitness innovation, redefining personal growth through fitness by merging AI, neuroscience, and data analytics into a single adaptive application (app).
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Purpose Card -->
+                    <div class="vpv-card purpose-card">
+                        <div class="vpv-icon">
+                            <svg width="80" height="80" viewBox="0 0 100 100">
+                                <circle cx="50" cy="50" r="35" fill="none" stroke="#00ff88" stroke-width="3"/>
+                                <circle cx="50" cy="50" r="5" fill="#00ff88"/>
+                                <line x1="50" y1="50" x2="50" y2="20" stroke="#00ff88" stroke-width="3"/>
+                                <line x1="50" y1="50" x2="75" y2="65" stroke="#00ff88" stroke-width="3"/>
+                                <circle cx="50" cy="20" r="4" fill="#00ff88"/>
+                                <circle cx="75" cy="65" r="4" fill="#00ff88"/>
+                            </svg>
+                        </div>
+                        <div style="flex: 1;">
+                            <div class="vpv-label" style="font-size: 1.8rem;">Purpose</div>
+                            <div class="vpv-content" style="font-size: 1.1rem;">
+                                VitaNexus simplifies various aspects of fitness to help overcome the confusion and complexity associated with using multiple apps/coaches to aid in the development of digital wellness enthusiasts aged 18–40.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Section -->
+                <div class="values-section" style="margin-top: 0;">
+                    <div class="vpv-label" style="text-align: center; margin-bottom: 0.8rem; font-size: 1.8rem;">Values</div>
+                    <div style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 2rem;">
+                        <div class="value-compact-card" style="text-align: center; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="value-compact-icon" style="margin: 0 auto;">
+                                <svg width="70" height="70" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="35" r="15" fill="none" stroke="#00d4ff" stroke-width="3"/>
+                                    <path d="M 35 55 Q 35 45, 50 45 Q 65 45, 65 55 L 65 75 Q 65 80, 60 80 L 40 80 Q 35 80, 35 75 Z" fill="none" stroke="#00d4ff" stroke-width="3"/>
+                                </svg>
+                            </div>
+                            <div class="value-compact-text" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <strong style="display: block; margin-bottom: 0.5rem; font-size: 1.15rem;">Personalisation</strong>
+                                <p style="margin: 0; font-size: 1rem;">Recognising individual uniqueness</p>
+                            </div>
+                        </div>
+
+                        <div class="value-compact-card" style="text-align: center; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="value-compact-icon" style="margin: 0 auto;">
+                                <svg width="70" height="70" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="#00ff88" stroke-width="3"/>
+                                    <path d="M 30 50 L 45 65 L 70 35" stroke="#00ff88" stroke-width="3" fill="none"/>
+                                </svg>
+                            </div>
+                            <div class="value-compact-text" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <strong style="display: block; margin-bottom: 0.5rem; font-size: 1.15rem;">Accessibility</strong>
+                                <p style="margin: 0; font-size: 1rem;">Quality health tools for everyone</p>
+                            </div>
+                        </div>
+
+                        <div class="value-compact-card" style="text-align: center; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="value-compact-icon" style="margin: 0 auto;">
+                                <svg width="70" height="70" viewBox="0 0 100 100">
+                                    <rect x="30" y="25" width="40" height="50" rx="5" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+                                    <line x1="40" y1="35" x2="60" y2="35" stroke="#8b5cf6" stroke-width="2"/>
+                                    <line x1="40" y1="45" x2="60" y2="45" stroke="#8b5cf6" stroke-width="2"/>
+                                    <line x1="40" y1="55" x2="55" y2="55" stroke="#8b5cf6" stroke-width="2"/>
+                                </svg>
+                            </div>
+                            <div class="value-compact-text" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <strong style="display: block; margin-bottom: 0.5rem; font-size: 1.15rem;">Integrity</strong>
+                                <p style="margin: 0; font-size: 1rem;">Trust through data transparency</p>
+                            </div>
+                        </div>
+
+                        <div class="value-compact-card" style="text-align: center; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="value-compact-icon" style="margin: 0 auto;">
+                                <svg width="70" height="70" viewBox="0 0 100 100">
+                                    <path d="M 50 20 L 60 40 L 80 45 L 65 60 L 70 80 L 50 70 L 30 80 L 35 60 L 20 45 L 40 40 Z" fill="none" stroke="#00d4ff" stroke-width="3"/>
+                                </svg>
+                            </div>
+                            <div class="value-compact-text" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <strong style="display: block; margin-bottom: 0.5rem; font-size: 1.15rem;">Innovation</strong>
+                                <p style="margin: 0; font-size: 1rem;">Pushing tech boundaries for human wellbeing</p>
+                            </div>
+                        </div>
+
+                        <div class="value-compact-card" style="text-align: center; min-height: 240px; display: flex; flex-direction: column; justify-content: space-between;">
+                            <div class="value-compact-icon" style="margin: 0 auto;">
+                                <svg width="70" height="70" viewBox="0 0 100 100">
+                                    <path d="M 50 25 Q 30 35, 30 50 Q 30 70, 50 80 Q 70 70, 70 50 Q 70 35, 50 25 Z" fill="none" stroke="#00ff88" stroke-width="3"/>
+                                    <path d="M 45 45 L 50 55 L 60 40" stroke="#00ff88" stroke-width="2" fill="none"/>
+                                </svg>
+                            </div>
+                            <div class="value-compact-text" style="text-align: center; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                                <strong style="display: block; margin-bottom: 0.5rem; font-size: 1.15rem;">Wellbeing</strong>
+                                <p style="margin: 0; font-size: 1rem;">Valuing recovery as much as performance</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Value Proposition -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Value Proposition</h2>
+            </div>
+            
+            <div class="content-card">
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
+                    <!-- Pricing Card -->
+                    <div class="value-prop-card" style="background: linear-gradient(135deg, rgba(0, 212, 255, 0.1), rgba(0, 212, 255, 0.05)); border: 2px solid rgba(0, 212, 255, 0.3); border-radius: 15px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <div style="margin-bottom: 1rem;">
+                            <svg width="60" height="60" viewBox="0 0 100 100" style="display: block; margin: 0 auto;">
+                                <circle cx="50" cy="50" r="35" fill="none" stroke="#00d4ff" stroke-width="3"/>
+                                <text x="50" y="60" font-size="40" fill="#00d4ff" text-anchor="middle" font-weight="bold">$</text>
+                            </svg>
+                        </div>
+                        <h3 style="color: #00d4ff; font-size: 1.4rem; margin: 0 0 0.8rem 0;">Pricing</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: center; width: 100%;">
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <strong>✓</strong> Freemium model with optional premium upgrade
+                            </li>
+                            <li style="padding: 0.4rem 0;">
+                                <strong>✓</strong> Cost-effective compared to personal coaching
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Convenience Card -->
+                    <div class="value-prop-card" style="background: linear-gradient(135deg, rgba(0, 255, 136, 0.1), rgba(0, 255, 136, 0.05)); border: 2px solid rgba(0, 255, 136, 0.3); border-radius: 15px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <div style="margin-bottom: 1rem;">
+                            <svg width="60" height="60" viewBox="0 0 100 100" style="display: block; margin: 0 auto;">
+                                <rect x="25" y="20" width="50" height="60" rx="5" fill="none" stroke="#00ff88" stroke-width="3"/>
+                                <circle cx="50" cy="50" r="15" fill="none" stroke="#00ff88" stroke-width="2"/>
+                                <line x1="50" y1="50" x2="50" y2="40" stroke="#00ff88" stroke-width="2"/>
+                                <line x1="50" y1="50" x2="58" y2="50" stroke="#00ff88" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 style="color: #00ff88; font-size: 1.4rem; margin: 0 0 0.8rem 0;">Convenience</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: center; width: 100%;">
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <strong>✓</strong> All-in-one platform
+                            </li>
+                            <li style="padding: 0.4rem 0;">
+                                <strong>✓</strong> Accessible anywhere and anytime
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Innovation Card -->
+                    <div class="value-prop-card" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05)); border: 2px solid rgba(139, 92, 246, 0.3); border-radius: 15px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                        <div style="margin-bottom: 1rem;">
+                            <svg width="60" height="60" viewBox="0 0 100 100" style="display: block; margin: 0 auto;">
+                                <path d="M 50 20 L 55 35 L 70 40 L 58 52 L 60 67 L 50 60 L 40 67 L 42 52 L 30 40 L 45 35 Z" fill="none" stroke="#8b5cf6" stroke-width="3"/>
+                                <circle cx="50" cy="50" r="8" fill="#8b5cf6"/>
+                            </svg>
+                        </div>
+                        <h3 style="color: #8b5cf6; font-size: 1.4rem; margin: 0 0 0.8rem 0;">Innovation</h3>
+                        <ul style="list-style: none; padding: 0; margin: 0; text-align: center; width: 100%;">
+                            <li style="padding: 0.4rem 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <strong>✓</strong> Recovery tracking through innovative methods
+                            </li>
+                            <li style="padding: 0.4rem 0;">
+                                <strong>✓</strong> Real-time adaptive coaching that adjusts plans based on user progress
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Prototype Interface -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Prototype Interface</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="text-content">
+                    <!-- App Showcase Section -->
+                    <div class="app-showcase">
+                        <div class="app-screens" style="transform: none; transition: none;">
+<img src="nexus-app-interface.png" alt="NEXUS App Interface Showcase" style="pointer-events: none;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Location</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="text-content">
+                    <p style="font-size: 1.15rem; line-height: 1.8;">Adelaide was selected as the initial headquarters due to its local roots, providing easier management, existing partnerships, and strong access to networks, while future growth aims to position a facility near future key partners like Derrimut 24:7 Gym for strategic collaboration and scalability (see map below).</p>
+                    
+                    <div style="margin: 1.5rem 0; text-align: center;">
+<img src="headquarters-map.png" alt="Map showing potential headquarters locations near Derrimut 24:7 Gym facilities in Adelaide" style="max-width: 50%; height: auto; border-radius: 10px; box-shadow: 0 4px 6px rgba(0, 229, 255, 0.3);">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Registration Details -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Registration Details</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="text-content">
+                    <p style="color: #94a3b8; font-size: 1.1rem; text-align: center; margin-bottom: 2rem;">VitaNexus aligns with the following registration details:</p>
+                    
+                    <!-- Legal Compliance Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; max-width: 1400px; margin: 0 auto;">
+                        
+                        <!-- Fair Trading -->
+                        <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 32px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                            <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                    <path d="M2 17l10 5 10-5"></path>
+                                    <path d="M2 12l10 5 10-5"></path>
+                                </svg>
+                            </div>
+                            <h4 style="color: #06b6d4; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600;">Fair Trading</h4>
+                            <p style="color: #94a3b8; line-height: 1.6; font-size: 0.95rem;">Fully aligned with the Competition and Consumer Act 2010 and Australian Consumer Law, ensuring accurate representations, fair refunds, and safe digital service standards.</p>
+                        </div>
+                        
+                        <!-- Privacy Laws -->
+                        <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 32px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                            <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                            </div>
+                            <h4 style="color: #06b6d4; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600;">Privacy Laws</h4>
+                            <p style="color: #94a3b8; line-height: 1.6; font-size: 0.95rem;">Data collection and storage follow Australian privacy principles, protecting user information through encrypted, secure systems.</p>
+                        </div>
+                        
+                        <!-- Intellectual Property -->
+                        <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 16px; padding: 2rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 12px 32px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                            <div style="width: 80px; height: 80px; margin: 0 auto 1.5rem; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 20px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);">
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                </svg>
+                            </div>
+                            <h4 style="color: #06b6d4; font-size: 1.3rem; margin-bottom: 1rem; font-weight: 600;">Intellectual Property</h4>
+                            <p style="color: #94a3b8; line-height: 1.6; font-size: 0.95rem;">Trademarks, brand identity, and proprietary AI systems are protected under IP Australia registration to safeguard innovation and competitiveness.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Legal Consideration and Insurance Requirements -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Legal Consideration and Insurance Requirements</h2>
+            </div>
+            
+            <div class="content-card">
+                <div class="text-content">
+                    <!-- Legal Compliance Section -->
+                    <div style="margin-bottom: 2rem;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <h3 style="font-size: 1.6rem; color: #06b6d4; margin-bottom: 0.8rem; font-weight: 600;">Legal Compliance</h3>
+                            <p style="color: #94a3b8; font-size: 1rem; max-width: 800px; margin: 0 auto;">VitaNexus operates as a sole trader, registered with an Australian Business Number (ABN) under the Australian Taxation Office (ATO). Complying with the following:</p>
+                        </div>
+                        
+                        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; max-width: 1200px; margin: 0 auto;">
+                            
+                            <!-- Business Name Registration -->
+                            <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer; width: calc(33.333% - 0.67rem); min-width: 280px; max-width: 350px;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
+                                    </svg>
+                                </div>
+                                <h4 style="color: #06b6d4; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Business Name Registration</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">Protecting brand identity and authenticity in all digital marketplaces.</p>
+                            </div>
+                            
+                            <!-- Consumer Product Safety -->
+                            <div style="background: rgba(16, 185, 129, 0.05); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer; width: calc(33.333% - 0.67rem); min-width: 280px; max-width: 350px;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(16, 185, 129, 0.3)'; this.style.borderColor='#10b981'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(16, 185, 129, 0.3)'">
+                                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #10b981, #059669); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                    </svg>
+                                </div>
+                                <h4 style="color: #10b981; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Consumer Product Safety Standards</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">Observed for any health or wellness recommendations delivered through the platform.</p>
+                            </div>
+                            
+                            <!-- GST -->
+                            <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer; width: calc(33.333% - 0.67rem); min-width: 280px; max-width: 350px;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <line x1="12" y1="1" x2="12" y2="23"></line>
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+                                    </svg>
+                                </div>
+                                <h4 style="color: #06b6d4; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Goods and Services Tax (GST)</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">To be registered once the annual turnover threshold of $75,000 is met.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Insurance Coverage Section -->
+                    <div style="margin-bottom: 2rem;">
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <h3 style="font-size: 1.6rem; color: #10b981; margin-bottom: 0.8rem; font-weight: 600;">Insurance Coverage</h3>
+                            <p style="color: #94a3b8; font-size: 1rem; max-width: 750px; margin: 0 auto;">To minimise business risk and protect users, VitaNexus maintains or plans to obtain the following:</p>
+                        </div>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; max-width: 1200px; margin: 0 auto;">
+                            
+                            <!-- Public Liability Insurance -->
+                            <div style="background: rgba(16, 185, 129, 0.05); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(16, 185, 129, 0.3)'; this.style.borderColor='#10b981'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(16, 185, 129, 0.3)'">
+                                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #10b981, #059669); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                        <circle cx="9" cy="7" r="4"></circle>
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                                    </svg>
+                                </div>
+                                <h4 style="color: #10b981; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Public Liability Insurance</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">Covers claims arising from service-related issues.</p>
+                            </div>
+                            
+                            <!-- Cyber and Data Protection -->
+                            <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(6, 182, 212, 0.3);">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                    </svg>
+                                </div>
+                                <h4 style="color: #06b6d4; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Cyber and Data Protection Insurance</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">Protects user data and systems against cyberattacks or breaches.</p>
+                            </div>
+                            
+                            <!-- Professional Indemnity -->
+                            <div style="background: rgba(16, 185, 129, 0.05); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(16, 185, 129, 0.3)'; this.style.borderColor='#10b981'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(16, 185, 129, 0.3)'">
+                                <div style="width: 60px; height: 60px; margin: 0 auto 1rem; background: linear-gradient(135deg, #10b981, #059669); border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 16px rgba(16, 185, 129, 0.3);">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14 2 14 8 20 8"></polyline>
+                                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                                    </svg>
+                                </div>
+                                <h4 style="color: #10b981; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Professional Indemnity Insurance</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">Covers claims related to AI-generated fitness or health recommendations.</p>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    
+                    <!-- Legal Insurance Obligations -->
+                    <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 2rem; text-align: center; max-width: 1200px; margin: 0 auto;">
+                        <h3 style="font-size: 1.6rem; color: #06b6d4; margin-bottom: 1rem; font-weight: 600;">Legal Insurance Obligations</h3>
+                        <p style="color: #94a3b8; font-size: 1rem; max-width: 800px; margin: 0 auto 1.5rem;">Although VitaNexus operates entirely online with no physical operations or vehicles, the following are recognised:</p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 800px; margin: 0 auto 1.5rem;">
+                            <div style="background: rgba(16, 185, 129, 0.05); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(16, 185, 129, 0.3)'; this.style.borderColor='#10b981'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(16, 185, 129, 0.3)'">
+                                <h4 style="color: #10b981; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Workers' Compensation Insurance</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">To be arranged if employees or contractors are hired in the future.</p>
+                            </div>
+                            <div style="background: rgba(6, 182, 212, 0.05); border: 2px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; cursor: pointer;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 24px rgba(6, 182, 212, 0.3)'; this.style.borderColor='#06b6d4'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'; this.style.borderColor='rgba(6, 182, 212, 0.3)'">
+                                <h4 style="color: #06b6d4; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: 600;">Vehicle and Asset Insurance</h4>
+                                <p style="color: #94a3b8; line-height: 1.5; font-size: 0.9rem;">Not required due to the digital-only business model.</p>
+                            </div>
+                        </div>
+                        
+                        <p style="color: #94a3b8; font-size: 1rem; line-height: 1.6; max-width: 800px; margin: 0 auto;"><strong style="color: #06b6d4;">All compliance, registration, and insurance measures align with business.gov.au guidelines</strong>, ensuring VitaNexus operates legally, transparently, and with investor confidence.</p>
+                    </div>
+                    
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Organisational Chart -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Structure and Ownership</h2>
+            </div>
+            
+            <div class="content-card">
+                <!-- Organisational Chart -->
+                <div class="org-chart-container" style="padding: 1.5rem;">
+                    <div class="org-chart-header" style="margin-bottom: 1rem;">
+                        <h3>Organisational Chart</h3>
+                    </div>
+
+                    <div class="org-chart" style="gap: 0.5rem;">
+                        <!-- CEO Level -->
+                        <div class="org-level">
+                            <div class="org-box" style="border: 2px solid #10b981; background: linear-gradient(135deg, #10b981, #059669); width: 80%; max-width: 900px; padding: 0.7rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);">
+                                <div class="org-title" style="color: white; font-size: 1rem; font-weight: 400;">Sole Trader</div>
+                            </div>
+                        </div>
+
+                        <!-- Vertical Connector -->
+                        <div style="width: 2px; height: 20px; background: rgba(255, 255, 255, 0.3); margin: 0 auto;"></div>
+
+                        <!-- Horizontal Line for 3 branches -->
+                        <div style="position: relative; width: 80%; max-width: 900px; margin: 0 auto; height: 2px; background: rgba(255, 255, 255, 0.3);">
+                            <!-- Vertical drops to each C-level -->
+                            <div style="position: absolute; left: calc(16.66% - 1px); width: 2px; height: 20px; background: rgba(255, 255, 255, 0.3); top: 0;"></div>
+                            <div style="position: absolute; left: calc(50% - 1px); width: 2px; height: 20px; background: rgba(255, 255, 255, 0.3); top: 0;"></div>
+                            <div style="position: absolute; left: calc(83.33% - 1px); width: 2px; height: 20px; background: rgba(255, 255, 255, 0.3); top: 0;"></div>
+                        </div>
+
+                        <!-- Second Level: CTO, COO, CMO (Aligned) -->
+                        <div class="org-level" style="gap: 1.5rem; align-items: flex-start; margin-top: 20px; width: 80%; max-width: 900px; margin-left: auto; margin-right: auto;">
+                            <!-- CTO Branch -->
+                            <div class="org-branch" style="gap: 0.4rem; flex: 1;">
+                                <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.7rem; width: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
+                                    <div class="org-title" style="color: white; font-size: 1rem; font-weight: 400;">Chief Technology Officer (CTO)</div>
+                                </div>
+                                <div style="width: 2px; height: 15px; background: rgba(255, 255, 255, 0.3); margin: 0 auto;"></div>
+                                <div style="display: flex; flex-direction: column; gap: 0.4rem; align-items: stretch;">
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Data & AI Development</div>
+                                    </div>
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Product Team</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- COO Branch -->
+                            <div class="org-branch" style="gap: 0.4rem; flex: 1;">
+                                <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #10b981, #059669); padding: 0.7rem; width: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
+                                    <div class="org-title" style="color: white; font-size: 1rem; font-weight: 400;">Chief Operating Officer (COO)</div>
+                                </div>
+                                <div style="width: 2px; height: 15px; background: rgba(255, 255, 255, 0.3); margin: 0 auto;"></div>
+                                <div style="display: flex; flex-direction: column; gap: 0.4rem; align-items: stretch;">
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #10b981, #059669); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Operations & Compliance</div>
+                                    </div>
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #10b981, #059669); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Customer Support</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- CMO Branch -->
+                            <div class="org-branch" style="gap: 0.4rem; flex: 1;">
+                                <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.7rem; width: 100%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);">
+                                    <div class="org-title" style="color: white; font-size: 1rem; font-weight: 400;">Chief Marketing Officer (CMO)</div>
+                                </div>
+                                <div style="width: 2px; height: 15px; background: rgba(255, 255, 255, 0.3); margin: 0 auto;"></div>
+                                <div style="display: flex; flex-direction: column; gap: 0.4rem; align-items: stretch;">
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Marketing & Branding</div>
+                                    </div>
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Partnerships & Community</div>
+                                    </div>
+                                    <div class="org-box" style="border: 2px solid #ef4444; background: linear-gradient(135deg, #06b6d4, #0891b2); padding: 0.6rem; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);">
+                                        <div class="org-title" style="color: white; font-size: 0.9rem; font-weight: 300;">Influencer & Gym Relations</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Note - CENTERED -->
+                    <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(239, 68, 68, 0.1); border-radius: 8px; text-align: center;">
+                        <p style="color: #ef4444; font-size: 0.9rem; margin: 0; font-weight: 300;">
+                            <strong style="font-weight: 500;">Note:</strong> Positions outlined in red represent future roles that will be established as the business expands and scales its operations
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Risk Management -->
+        <section class="business-section">
+            <div class="section-header">
+                <h2 class="section-title">Risk Management</h2>
+            </div>
+            
+            <div class="content-card">
+                <!-- SWOT Analysis Header -->
+                <div style="text-align: center; margin-bottom: 2rem;">
+                    <h3 style="font-size: 2rem; color: #06b6d4; margin-bottom: 0; font-weight: 600;">SWOT Analysis</h3>
+                </div>
+
+                <!-- SWOT Grid Container -->
+                <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto;">
+                    
+                    <!-- STRENGTHS (Top Left - Cyan/Blue) -->
+                    <div class="swot-box" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05)); border: 3px solid #06b6d4; border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(6, 182, 212, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <!-- Animated Header Badge -->
+                        <div class="swot-circle" style="position: absolute; top: -10px; right: -10px; width: 100px; height: 100px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 50%; opacity: 0.1;"></div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);">
+                                <svg width="35" height="35" viewBox="0 0 100 100">
+                                    <path d="M 50 20 L 60 40 L 80 45 L 65 60 L 70 80 L 50 70 L 30 80 L 35 60 L 20 45 L 40 40 Z" fill="white"/>
+                                </svg>
+                            </div>
+                            <h4 style="color: #06b6d4; font-size: 1.8rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">STRENGTHS</h4>
+                        </div>
+                        
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">✓</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">AI-driven personalisation enhances user engagement</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">✓</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Low operating costs due to digital infrastructure</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">✓</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Strong partnerships with gyms and wellness brands</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">✓</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Scalable platform accessible globally</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- WEAKNESSES (Top Right - Green) -->
+                    <div class="swot-box" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05)); border: 3px solid #10b981; border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <!-- Animated Header Badge -->
+                        <div class="swot-circle" style="position: absolute; top: -10px; right: -10px; width: 100px; height: 100px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; opacity: 0.1; animation-delay: 1s;"></div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);">
+                                <svg width="35" height="35" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="35" fill="none" stroke="white" stroke-width="6"/>
+                                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h4 style="color: #10b981; font-size: 1.8rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">WEAKNESSES</h4>
+                        </div>
+                        
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">−</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">High initial development and marketing costs</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">−</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Reliance on consistent internet connectivity</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">−</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Limited brand recognition at launch</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">−</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Requires ongoing AI updates to maintain accuracy</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- OPPORTUNITIES (Bottom Left - Green) -->
+                    <div class="swot-box" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(16, 185, 129, 0.05)); border: 3px solid #10b981; border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(16, 185, 129, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <!-- Animated Header Badge -->
+                        <div class="swot-circle" style="position: absolute; top: -10px; right: -10px; width: 100px; height: 100px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 50%; opacity: 0.1; animation-delay: 2s;"></div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #10b981, #059669); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);">
+                                <svg width="35" height="35" viewBox="0 0 100 100">
+                                    <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="6"/>
+                                    <line x1="50" y1="35" x2="50" y2="65" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                                    <line x1="35" y1="50" x2="65" y2="50" stroke="white" stroke-width="6" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <h4 style="color: #10b981; font-size: 1.8rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">OPPORTUNITIES</h4>
+                        </div>
+                        
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">+</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Growing demand for digital health and fitness apps</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">+</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Integration with wearable technologies (Apple Watch, Fitbit)</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">+</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Expansion into international markets</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem; background: rgba(16, 185, 129, 0.05); border-radius: 8px; border-left: 3px solid #10b981;">
+                                <span style="color: #10b981; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">+</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Partnerships with universities, gyms, and health programs</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- THREATS (Bottom Right - Cyan/Blue) -->
+                    <div class="swot-box" style="background: linear-gradient(135deg, rgba(6, 182, 212, 0.15), rgba(6, 182, 212, 0.05)); border: 3px solid #06b6d4; border-radius: 20px; padding: 2rem; position: relative; overflow: hidden; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-8px)'; this.style.boxShadow='0 16px 40px rgba(6, 182, 212, 0.3)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none'">
+                        <!-- Animated Header Badge -->
+                        <div class="swot-circle" style="position: absolute; top: -10px; right: -10px; width: 100px; height: 100px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 50%; opacity: 0.1; animation-delay: 3s;"></div>
+                        
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem;">
+                            <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #06b6d4, #0891b2); border-radius: 12px; display: flex; align-items: center; justify-content: center; box-shadow: 0 8px 24px rgba(6, 182, 212, 0.3);">
+                                <svg width="35" height="35" viewBox="0 0 100 100">
+                                    <path d="M 50 25 L 55 45 L 50 65 L 45 45 Z" fill="white"/>
+                                    <circle cx="50" cy="75" r="4" fill="white"/>
+                                </svg>
+                            </div>
+                            <h4 style="color: #06b6d4; font-size: 1.8rem; margin: 0; font-weight: 700; letter-spacing: -0.5px;">THREATS</h4>
+                        </div>
+                        
+                        <ul style="list-style: none; padding: 0; margin: 0;">
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">!</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Data breaches or cybersecurity risks</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">!</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Competition from established fitness apps</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; margin-bottom: 1rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">!</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Regulatory changes around AI or health data</span>
+                            </li>
+                            <li style="display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.8rem; background: rgba(6, 182, 212, 0.05); border-radius: 8px; border-left: 3px solid #06b6d4;">
+                                <span style="color: #06b6d4; font-size: 1.2rem; font-weight: bold; flex-shrink: 0;">!</span>
+                                <span style="color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;">Low user retention due to market saturation</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Risk Assessment Section -->
+                <div style="margin-top: 2rem;">
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <h3 style="font-size: 1.8rem; color: #06b6d4; margin-bottom: 0; font-weight: 600;">Risk Assessment</h3>
+                    </div>
+
+                    <!-- Column Headers -->
+                    <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; padding: 1rem 1.5rem; background: linear-gradient(135deg, rgba(6, 182, 212, 0.1), rgba(16, 185, 129, 0.1)); border-radius: 12px; margin-bottom: 1.5rem; border: 2px solid rgba(6, 182, 212, 0.3); align-items: center;">
+                        <div style="text-align: center;">
+                            <h4 style="color: #06b6d4; font-size: 1rem; margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Risk</h4>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: #06b6d4; font-size: 1rem; margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Potential Result</h4>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: #06b6d4; font-size: 1rem; margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Danger Level</h4>
+                        </div>
+                        <div style="text-align: center;">
+                            <h4 style="color: #06b6d4; font-size: 1rem; margin: 0; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap;">Management Strategy</h4>
+                        </div>
+                    </div>
+
+                    <!-- Risk Cards Container -->
+                    <div style="display: grid; gap: 1rem;">
+                        
+                        <!-- Risk 1: Cybersecurity breach -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">Cybersecurity breach</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Loss of user trust, legal penalties, data leaks</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(239, 68, 68, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #ef4444, #dc2626); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">HIGH</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Implement advanced encryption, routine security audits, and cyber insurance.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk 2: Technical failure or AI malfunction -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">Technical failure or AI malfunction</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Poor user experience, negative reviews</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(239, 68, 68, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #ef4444, #dc2626); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">HIGH</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Continuous app testing, bug monitoring, and AI model refinement.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk 3: Low early adoption rate -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">Low early adoption rate</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Reduced revenue and growth delays</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(234, 179, 8, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #eab308, #ca8a04); width: 66%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">MEDIUM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Targeted marketing, influencer campaigns, and limited-time free trials.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk 4: Regulatory non-compliance -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">Regulatory non-compliance</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Legal consequences or fines</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(239, 68, 68, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #ef4444, #dc2626); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">HIGH</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Regular legal consultations and compliance with privacy and health data laws.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk 5: Competitor pressure -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">Competitor pressure</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Market share loss</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(234, 179, 8, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #eab308, #ca8a04); width: 66%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">MEDIUM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Differentiate through AI accuracy, UX design, and integrated wellness partnerships.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk 6: Funding shortfall -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">Funding shortfall</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Delayed operations and feature rollouts</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(234, 179, 8, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #eab308, #ca8a04); width: 66%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">MEDIUM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Maintain investor relations and secure backup financing options.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Risk 7: User data misuse -->
+                        <div style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05)); border: 2px solid rgba(16, 185, 129, 0.3); border-radius: 16px; padding: 1.5rem;">
+                            <div style="display: grid; grid-template-columns: 1fr 1.2fr 120px 1.8fr; gap: 1.5rem; align-items: center;">
+                                <div style="text-align: center;">
+                                    <h4 style="color: #10b981; font-size: 1.1rem; margin: 0; font-weight: 700;">User data misuse</h4>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #cbd5e1; margin: 0; font-size: 0.95rem; line-height: 1.5;">Brand reputation damage</p>
+                                </div>
+                                <div>
+                                    <div style="background: rgba(239, 68, 68, 0.2); border-radius: 8px; height: 32px; position: relative; overflow: hidden;">
+                                        <div style="background: linear-gradient(90deg, #ef4444, #dc2626); width: 100%; height: 100%; border-radius: 8px; display: flex; align-items: center; justify-content: center;">
+                                            <span style="color: white; font-weight: 700; font-size: 0.85rem; z-index: 1;">HIGH</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div style="text-align: center;">
+                                    <p style="color: #94a3b8; margin: 0; font-size: 0.9rem; line-height: 1.5;">Adhere to the Australian Privacy Principles (APPs) and strict data control protocols.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>© 2025 VitaNexus. All rights reserved.</p>
+            <div class="footer-meta">
+                <span><strong>Sace ID:</strong> 323000R</span>
+                <span><strong>Word Count:</strong> 1697</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add active state to navigation on scroll
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('.business-section');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === window.location.pathname) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.business-section').forEach(section => {
+            section.style.opacity = '0';
+            section.style.transform = 'translateY(30px)';
+            section.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(section);
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.content-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Parallax effect for background elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.container::before, .container::after');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = index === 0 ? 0.5 : 0.3;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Add ripple effect to buttons
+        document.querySelectorAll('.back-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Animate numbers on scroll
+        const animateValue = (element, start, end, duration) => {
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                element.textContent = Math.floor(progress * (end - start) + start);
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        };
+
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+
+        // Add typing effect to section titles
+        const typeWriter = (element, text, speed = 50) => {
+            let i = 0;
+            element.textContent = '';
+            const type = () => {
+                if (i < text.length) {
+                    element.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            };
+            type();
+        };
+
+        // Lazy load images
+        const lazyLoadImages = () => {
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.removeAttribute('data-src');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        };
+
+        lazyLoadImages();
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') {
+                const nextLink = document.querySelector('.nav-links a.active').nextElementSibling;
+                if (nextLink) nextLink.click();
+            } else if (e.key === 'ArrowLeft') {
+                const prevLink = document.querySelector('.nav-links a.active').previousElementSibling;
+                if (prevLink) prevLink.click();
+            }
+        });
+
+        // Performance monitoring
+        if ('PerformanceObserver' in window) {
+            const perfObserver = new PerformanceObserver((list) => {
+                for (const entry of list.getEntries()) {
+                    console.log('Performance:', entry.name, entry.duration);
+                }
+            });
+            perfObserver.observe({ entryTypes: ['measure', 'navigation'] });
+        }
+
+        // Add smooth reveal animation for timeline items
+        const timelineObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateX(0)';
+                    }, index * 100);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('[style*="display: flex"][style*="margin-bottom"]').forEach(item => {
+            if (item.closest('.org-chart')) return; // Skip org chart items
+            item.style.opacity = '0';
+            item.style.transition = 'all 0.6s ease';
+            timelineObserver.observe(item);
+        });
+    </script>
+</body>
+</html>
